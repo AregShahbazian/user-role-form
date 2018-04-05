@@ -16,11 +16,16 @@ describe('Action handler', () => {
         {id: 2, name: 'Assembly Ikea furniture'},
         {id: 3, name: 'Datumize Zentral'}];
 
+    const userRoleProject = [
+        {id: 1, userId: 1, roleId: 1, projectId: 1},
+        {id: 2, userId: 2, roleId: 1, projectId: 2},
+        {id: 3, userId: 2, roleId: 3, projectId: 3}];
+
     const state = {
         users,
         roles,
         projects,
-        userRoleProject: [],
+        userRoleProject,
         loading: false,
         error: undefined
     };
@@ -38,8 +43,4 @@ describe('Action handler', () => {
     })
 
 })
-
-
-
-
 

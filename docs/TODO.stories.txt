@@ -1,11 +1,10 @@
 
-configure redux
-configure redux-saga
-
-create routines
-
 create reducers specs
     design state
+        To represent many-to-many relations in store, use redux-rom
+            https://stackoverflow.com/questions/42238802/redux-many-to-many-relationship
+
+
 create reducers
 
 create sagas specs
@@ -22,3 +21,8 @@ create UI components
 
 
 *** HISTORY ***
+
+configure redux
+configure redux-saga
+
+create routines

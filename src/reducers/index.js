@@ -19,7 +19,7 @@ export const handleFulfill = (state, payload) => {
     return state;
 };
 
-const userRoles = handleActions({
+const userRoleProject = handleActions({
     /* USER_ROLE_PROJECT routine reducers */
     [userRoleProjectRoutines.REQUEST]
         (state, action) {
@@ -47,5 +47,5 @@ const userRoles = handleActions({
 });
 
 export default combineReducers({
-    userRoles
+    userRoleProject
 })
