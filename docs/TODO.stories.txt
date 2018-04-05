@@ -1,0 +1,23 @@
+
+configure redux
+configure redux-saga
+
+create routines specs
+create routines
+
+create api-function specs
+create api-function and mocks
+
+create reducers specs
+create reducers
+
+create sagas specs
+create sagas
+
+create e2e tests
+
+create UI components
+    form with redux-form
+
+
+*** HISTORY ***
