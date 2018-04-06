@@ -69,7 +69,7 @@ const makeRequest = (method, request, schema) =>
  */
 const callApi = (endpoint = '', schema, method = GET, payload = {}, meta = {}) => {
     let request = createRequest(endpoint, method, payload, meta.id)
-    console.log(`Calling api at ${request.fullEndpoint} with method ${method} and payload ${JSON.stringify(request.requestBody)}`)
+    console.log(`api\t Calling api at ${request.fullEndpoint} with method ${method} and payload ${JSON.stringify(request.requestBody)}`)
     return makeRequest(method, request, schema)
 }
 

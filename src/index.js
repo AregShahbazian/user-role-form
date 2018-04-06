@@ -5,8 +5,9 @@ import createSagaMiddleware from "redux-saga";
 import {Provider} from "react-redux";
 import reducer from "./reducers/index";
 import rootSaga from "./sagas/index";
-import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
+import 'react-widgets/dist/css/react-widgets.css';
+import App from "./components/App";
 
 const sagaMiddleware = createSagaMiddleware();
 

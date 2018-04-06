@@ -2,23 +2,23 @@ import {normalize, schema} from "normalizr";
 
 const roles = "roles"
 const rolesSchema = new schema.Entity(roles);
-const rolesInitialState = normalize([], new schema.Array(rolesSchema))
+const rolesInitialState = {...normalize([], new schema.Array(rolesSchema)), loading:false};
 
 const projects = "projects"
 const projectsSchema = new schema.Entity(projects);
-const projectsInitialState = normalize([], new schema.Array(projectsSchema))
+const projectsInitialState = {...normalize([], new schema.Array(projectsSchema)), loading:false};
 
 const projectRoles = "projectRoles"
 const projectRolesSchema = new schema.Entity("projectRoles", {
     role: rolesSchema, project: projectsSchema
 })
-const projectRolesInitialState = normalize([], new schema.Array(projectRolesSchema))
+const projectRolesInitialState = {...normalize([], new schema.Array(projectRolesSchema)), loading:false};
 
 const users = "users"
 const usersSchema = new schema.Entity(users, {
     projectRoles: [projectRolesSchema]
 });
-const usersInitialState = normalize([], new schema.Array(usersSchema))
+const usersInitialState = {...normalize([], new schema.Array(usersSchema)), loading:false};
 
 const entityConfigs = {}
 

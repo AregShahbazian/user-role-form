@@ -13,24 +13,24 @@ import apiFunctions from "../api/index"
  * @param action action that triggered the asynchronous entity operation
  */
 export function* makeApiCall(entityOp, apiFn, action) {
-    console.log("Making api call for action: %s", action.type);
+    console.log("saga\t Making api call for action: %s", action.type);
 
-    console.log("put : entity operation request")
+    console.log("saga\t put : entity operation request")
     yield put(entityOp.request())
 
-    console.log("call : api function")
+    console.log("saga\t call : api function")
     const {response, error} = yield call(apiFn, action.payload, action.meta)
 
     if (response) {
-        // console.log("put : entity operation success\n normalized response: %s", JSON.stringify(response))
+        // console.log("saga\t put : entity operation success\n normalized response: %s", JSON.stringify(response))
         yield put(entityOp.success(response))
     }
     else {
-        console.log("put : entity operation failure")
+        console.log("saga\t put : entity operation failure")
         console.error(error)
         yield put(entityOp.failure(error))
     }
-    console.log("put : entity operation fulfill")
+    console.log("saga\t put : entity operation fulfill")
     yield put(entityOp.fulfill())
 }
 

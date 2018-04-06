@@ -1,5 +1,6 @@
 import config from "../config/index"
 import {combineReducers} from "redux";
+import {reducer as formReducer} from "redux-form";
 import update from "immutability-helper"
 import {merge, reduce, union} from "lodash";
 import {combineActions, handleActions} from "redux-actions";
@@ -84,5 +85,6 @@ let entityDataReducers = reduce(config, (reducers, entityConfig, entityName) => 
 }, {})
 
 export default combineReducers({
-    ...entityDataReducers
+    ...entityDataReducers,
+    form: formReducer
 })

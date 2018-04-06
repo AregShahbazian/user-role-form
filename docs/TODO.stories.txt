@@ -1,10 +1,24 @@
 
+create UI components
+    form with redux-form and react-widgets
+
+Component hierarchy:
+
+App
+	UserSelector		    users
+	UserRolesTable          projectRoles
+    	[ProjectRoleRow]	project,role
+	ProjectRoleAdd		    projects
+
+use selectors in containers
 
 create e2e tests
 
-create UI components
-    form with redux-form
+remove non-user entities from store
+    !main ops are on user
 
+
+check unit test coverage and quality
 
 *** HISTORY ***
 

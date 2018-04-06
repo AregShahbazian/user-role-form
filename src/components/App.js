@@ -1,13 +1,12 @@
-import React, {Component} from 'react';
+import React from 'react';
+import UserSelectorContainer from "../containers/UserSelectorContainer";
+import ProjectRolesContainer from "../containers/UserRolesTableContainer";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-          Hello
-      </div>
-    );
-  }
-}
+const App = () => (
+    <div>
+        <UserSelectorContainer/>
+        <ProjectRolesContainer/>
+    </div>
+);
 
-export default App;
+export default App
