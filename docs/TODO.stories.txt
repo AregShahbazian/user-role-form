@@ -1,18 +1,4 @@
 
-create reducers specs
-    design state
-        To represent many-to-many relations in store, use redux-rom
-            https://stackoverflow.com/questions/42238802/redux-many-to-many-relationship
-
-
-create reducers
-
-create sagas specs
-create sagas
-
-create api-function specs
-create api-function and mocks
-
 
 create e2e tests
 
@@ -26,3 +12,18 @@ configure redux
 configure redux-saga
 
 create routines
+
+create reducers specs
+    design state
+        To represent many-to-many relations in store, use redux-orm
+            https://stackoverflow.com/questions/42238802/redux-many-to-many-relationship
+        Or use normalizr
+
+create reducers
+
+create sagas specs
+create sagas
+
+create api-function specs
+create api-function and mocks
+
