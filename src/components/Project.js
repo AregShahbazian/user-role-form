@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 const Project = ({project}) => (
-    <div>
+    <td>
         {JSON.stringify(project)}
-    </div>
+    </td>
 );
 
 Project.propTypes = {

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 const Role = ({role}) => (
-    <div>
+    <td>
         {JSON.stringify(role)}
-    </div>
+    </td>
 );
 
 Role.propTypes = {

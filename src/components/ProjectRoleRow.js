@@ -4,10 +4,10 @@ import ProjectContainer from "../containers/ProjectContainer";
 import RoleContainer from "../containers/RoleContainer";
 
 const ProjectRoleRow = ({projectRole}) => (
-    <div>
+    <tr>
         <ProjectContainer projectId={projectRole.project}/>
         <RoleContainer roleId={projectRole.role}/>
-    </div>
+    </tr>
 );
 
 ProjectRoleRow.propTypes = {
