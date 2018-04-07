@@ -1,11 +1,11 @@
 import React from 'react';
-import UserSelectorContainer from "../containers/UserSelectorContainer";
-import ProjectRolesContainer from "../containers/UserRolesTableContainer";
+import ProjectPickerContainer from "../containers/ProjectPickerContainer";
+import RolesTableContainer from "../containers/UserRoleTableContainer";
 
 const App = () => (
     <div>
-        <UserSelectorContainer/>
-        <ProjectRolesContainer/>
+        <ProjectPickerContainer/>
+        <RolesTableContainer/>
     </div>
 );
 

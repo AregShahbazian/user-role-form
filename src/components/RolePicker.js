@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-const Role = ({role}) => (
+const RolePicker = ({role}) => (
     <td>
         {JSON.stringify(role)}
     </td>
 );
 
-Role.propTypes = {
+RolePicker.propTypes = {
     role: PropTypes.object.isRequired
 };
 
-export default Role
+export default RolePicker

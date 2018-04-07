@@ -13,13 +13,18 @@ App
 
 	ProjectRoleAdd		    projects
 
+** approach user-centered or project-centered ..?
+
+
 use selectors in containers
+
 
 create e2e tests
 
 remove non-user entities from store
     !main ops are on user
 
+clean up unused map**toprops functions
 
 check unit test coverage and quality
 

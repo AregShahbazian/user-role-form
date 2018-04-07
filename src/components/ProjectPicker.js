@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {DropdownList} from 'react-widgets';
 import {Field} from "redux-form";
 
-const renderDropdownList = ({input, data, loading, valueField, textField}) =>
+const renderDropdownList = ({input, data, loading, valueField, textField, onSelect}) =>
     <DropdownList {...input}
                   filter
                   data={data}
@@ -11,34 +11,39 @@ const renderDropdownList = ({input, data, loading, valueField, textField}) =>
                   valueField={valueField}
                   textField={textField}
                   messages={{
-                      emptyList: "User list could not be retrieved",
+                      emptyList: "Project list could not be retrieved",
                       emptyFilter: "No results ...",
                       filterPlaceholder: "Search by name"
                   }}
-                  onChange={input.onChange}/>
+                  onChange={(e) => {
+                      input.onChange(e)
+                      onSelect(e)
+                  }}/>
 
 
-const UserSelector = ({users, loading}) => (
+const ProjectPicker = ({projects, loading, onSelect}) => (
     <div>
         <form>
-            <label>User </label>
+            <label>Project </label>
             <Field
-                name="user"
+                name="project"
                 component={renderDropdownList}
-                data={users}
+                data={projects}
                 loading={loading}
                 valueField="id"
                 textField="name"
+                onSelect={onSelect}
             />
         </form>
     </div>
 );
 
-UserSelector.propTypes = {
-    users: PropTypes.arrayOf(
+ProjectPicker.propTypes = {
+    projects: PropTypes.arrayOf(
         PropTypes.object.isRequired
     ).isRequired,
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    onSelect: PropTypes.func.isRequired
 };
 
-export default UserSelector
+export default ProjectPicker
