@@ -6,15 +6,15 @@ const UserRoleTable = ({projectUserRoles, loading}) => (
     <div>
         {loading ?
             <p>Loading...</p> :
-            Object.keys(projectUserRoles).length ?
+            Object.values(projectUserRoles).length ?
                 <table>
                     <tbody>
                     <tr>
                         <th>User</th>
                         <th>Role</th>
                     </tr>
-                    {Object.keys(projectUserRoles).map(id =>
-                        <UserRoleRowContainer key={id} {...projectUserRoles[id]}/>)}
+                    {Object.values(projectUserRoles).map(projectUserRole =>
+                        <UserRoleRowContainer key={projectUserRole.id} {...projectUserRole}/>)}
                     </tbody>
                 </table> :
                 <p>

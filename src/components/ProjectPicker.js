@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {DropdownList} from 'react-widgets';
 import {Field} from "redux-form";
 
-const renderDropdownList = ({input, data, loading, valueField, textField, onSelect}) =>
+const renderDropdownList = ({input, data, loading, valueField, textField, handleSelect}) =>
     <DropdownList {...input}
                   filter
                   data={data}
@@ -17,33 +17,31 @@ const renderDropdownList = ({input, data, loading, valueField, textField, onSele
                   }}
                   onChange={(e) => {
                       input.onChange(e)
-                      onSelect(e)
+                      handleSelect(e)
                   }}/>
 
 
-const ProjectPicker = ({projects, loading, onSelect}) => (
+const ProjectPicker = ({projects, loading, handleSelect}) => (
     <div>
         <form>
             <label>Project </label>
             <Field
                 name="project"
                 component={renderDropdownList}
-                data={projects}
+                data={Object.values(projects)}
                 loading={loading}
                 valueField="id"
                 textField="name"
-                onSelect={onSelect}
+                handleSelect={handleSelect}
             />
         </form>
     </div>
 );
 
 ProjectPicker.propTypes = {
-    projects: PropTypes.arrayOf(
-        PropTypes.object.isRequired
-    ).isRequired,
+    projects: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
-    onSelect: PropTypes.func.isRequired
+    handleSelect: PropTypes.func.isRequired
 };
 
 export default ProjectPicker

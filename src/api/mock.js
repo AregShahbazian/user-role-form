@@ -1,4 +1,5 @@
 import axios from "axios"
+import {forEach} from "lodash";
 import MockAdapter from "axios-mock-adapter"
 
 const mock = new MockAdapter(axios, {delayResponse: 500});
@@ -21,11 +22,16 @@ export const roles = {
     "3": {id: 3, name: 'Viewer'}
 };
 
+const projectUserRole1 = {id: 111, project: projects["1"], user: users["1"], role: roles["1"]};
+const projectUserRole2 = {id: 122, project: projects["1"], user: users["2"], role: roles["2"]};
+const projectUserRole3 = {id: 211, project: projects["2"], user: users["1"], role: roles["1"]};
+
 const projectUserRoles = {
-    "111": {id: 111, project: projects["1"], user: users["1"], role: roles["1"]},
-    "122": {id: 122, project: projects["1"], user: users["2"], role: roles["2"]},
-    "222": {id: 211, project: projects["2"], user: users["1"], role: roles["1"]},
+    "111": projectUserRole1,
+    "122": projectUserRole2,
+    "222": projectUserRole3,
 };
+
 
 mock.onGet('/projects').reply(200, Object.values(projects));
 mock.onGet('/projects/1').reply(200, projects["1"]);
@@ -52,3 +58,38 @@ mock.onGet('/projectUserRoles?project=1').reply(200, [
 mock.onGet('/projectUserRoles?project=2').reply(200, [
     projectUserRoles["222"]]);
 mock.onGet('/projectUserRoles?project=3').reply(200, []);
+
+forEach(Object.keys(roles), roleId => {
+    forEach(Object.keys(projectUserRoles), id => {
+        /* Mock PATCH'ing every combination of projectUserRoles and new roles */
+        mock.onPatch(`/projectUserRoles/${id}`,
+            {
+                role: roleId
+            }).reply(200,
+            {
+                ...projectUserRoles[id],
+                role: roles[roleId]
+            });
+
+        mock.onDelete(`/projectUserRoles/${id}`).reply(200, projectUserRoles[id]);
+    });
+
+    forEach(Object.keys(users), userId => {
+        forEach(Object.keys(projects), projectId => {
+            mock.onPost("/projectUserRoles",
+                {
+                    project: projectId,
+                    user: userId,
+                    role: roleId
+                }).reply(200,
+                {
+                    id: `${projectId}${userId}${roleId}`,
+                    project: projectId,
+                    user: userId,
+                    role: roleId
+                });
+        })
+    })
+
+});
+

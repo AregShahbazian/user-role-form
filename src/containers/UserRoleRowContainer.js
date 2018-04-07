@@ -1,25 +1,31 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import User from "../components/User";
-import RolePicker from "../components/RolePicker";
+import routines from "../actions/index"
+import UserRoleRow from "../components/UserRoleRow";
 
 const mapStateToProps = (state) => ({
-    users: state.projectUserRoles.entities.users,
-    roles: state.projectUserRoles.entities.roles
+    projectUsers: state.projectUserRoles.entities.users,
+    projectRoles: state.projectUserRoles.entities.roles,
+    roles: state.roles.entities.roles || {}
 });
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = ({
+    updateProjectUserRole: routines.PROJECT_USER_ROLES.UPDATE.trigger
+});
 
 class UserRoleRowContainer extends React.Component {
+    handleChange = (event) => {
+        const {id, roles, updateProjectUserRole} = this.props;
+        let roleId = event.target.value;
+        console.log(`Setting role to "${roles[roleId].name}"`)
+        updateProjectUserRole({role: roleId}, {id});
+    };
 
     render() {
-        const {user, role} = this.props;
-        console.info(this.props)
-        return <tr>
-            <User user={this.props.users[user]}/>
-            <RolePicker role={this.props.roles[role]}/>
-        </tr>
+        const {user, role, projectUsers, projectRoles, roles} = this.props;
+        return <UserRoleRow projectUser={projectUsers[user]} projectRole={projectRoles[role]} roles={roles}
+                            handleChange={this.handleChange}/>
     }
 }
 

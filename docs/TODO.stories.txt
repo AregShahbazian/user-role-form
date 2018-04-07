@@ -1,23 +1,7 @@
 
-create UI components
-    form with redux-form and react-widgets
+Create add-role component
 
-Component hierarchy:
-
-App
-	UserSelector		    users
-	UserRolesTable          projectRoles
-    	[ProjectRoleRow]	projectRoles
-    	    Project         project
-    	    Role            role
-
-	ProjectRoleAdd		    projects
-
-** approach user-centered or project-centered ..?
-
-
-use selectors in containers
-
+style-components
 
 create e2e tests
 
@@ -49,3 +33,9 @@ create sagas
 create api-function specs
 create api-function and mocks
 
+create UI components
+    form with redux-form and react-widgets
+
+Component hierarchy:
+
+use selectors in containers

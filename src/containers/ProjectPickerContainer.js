@@ -1,20 +1,11 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {concat, forEach} from "lodash";
 import {reduxForm} from "redux-form";
 import routines from "../actions/index"
 import ProjectPicker from "../components/ProjectPicker";
 
-const getProjectsFromState = (projectsState) => {
-    let cachedProjects = [];
-    forEach(projectsState.result, (id) => {
-        cachedProjects = concat(cachedProjects, projectsState.entities.projects[id])
-    });
-    return cachedProjects
-};
-
 const mapStateToProps = (state) => ({
-    projects: getProjectsFromState(state.projects),
+    projects: state.projects.entities.projects || {},
     loading: state.projects.loading
 });
 
@@ -30,7 +21,8 @@ class ProjectPickerContainer extends React.Component {
     };
 
     render() {
-        return <ProjectPicker projects={this.props.projects} loading={this.props.loading} onSelect={this.handleSelect}/>
+        return <ProjectPicker projects={this.props.projects} loading={this.props.loading}
+                              handleSelect={this.handleSelect}/>
     }
 
     componentWillMount() {
