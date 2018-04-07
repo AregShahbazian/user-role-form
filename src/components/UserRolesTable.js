@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import UserRolesRow from "./ProjectRoleRow";
+import ProjectRoleRowContainer from "../containers/ProjectRoleRowContainer";
 
-const UserRolesTable = ({projectRoles}) => (
-    <div>
-        {projectRoles.map(projectRole =>
-            <UserRolesRow key={projectRole.id} {...projectRole}/>)}
-    </div>
+const UserRolesTable = ({projectRolesIds}) => (
+    projectRolesIds.map(id => <ProjectRoleRowContainer key={id} id={id}/>)
 );
 
 UserRolesTable.propTypes = {
-    projectRoles: PropTypes.arrayOf(
-        PropTypes.object.isRequired
+    projectRolesIds: PropTypes.arrayOf(
+        PropTypes.number.isRequired
     ).isRequired
 };
 

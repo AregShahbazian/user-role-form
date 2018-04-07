@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import ProjectContainer from "../containers/ProjectContainer";
+import RoleContainer from "../containers/RoleContainer";
 
-const ProjectRoleRow = ({project, role}) => (
+const ProjectRoleRow = ({projectRole}) => (
     <div>
-        {JSON.stringify(project)}
-        {JSON.stringify(role)}
+        <ProjectContainer projectId={projectRole.project}/>
+        <RoleContainer roleId={projectRole.role}/>
     </div>
 );
 
 ProjectRoleRow.propTypes = {
-    project: PropTypes.object.isRequired,
-    role: PropTypes.object.isRequired
+    projectRole: PropTypes.object.isRequired
 };
 
 export default ProjectRoleRow
