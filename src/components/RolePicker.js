@@ -2,22 +2,23 @@ import React from 'react';
 import PropTypes from "prop-types";
 import styled from 'styled-components';
 
-const RoleOption = styled.span`
-  border: solid black 1px;
-  border-left-width: ${props => props.first ? "1px" : 0};
+const RoleSpan = styled.span`
+  border: outset #bbb 2px;
+  border-left-width: ${props => props.first ? "4px" : 0};
   border-top-left-radius:  ${props => props.first ? "8px" : 0};
   border-bottom-left-radius:  ${props => props.first ? "8px" : 0};
   border-top-right-radius:  ${props => props.last ? "8px" : 0};
   border-bottom-right-radius:  ${props => props.last ? "8px" : 0};
-  padding: 0.4em 0.2em;
+  
+  padding: 0.2em 0.2em;
 
-  font-weight:  ${props => props.selected && "bold"};
+  background-color:  ${props => props.selected && "#bbb"};
 `;
 
 const RolePicker = ({selectedRole, roles, handleRolePick, visible}) => {
     return <div>
         {visible && roles.map(role =>
-            <RoleOption
+            <RoleSpan
                 key={role.id}
                 onClick={() => handleRolePick(role.id)}
                 first={roles.indexOf(role) === 0}
@@ -25,7 +26,7 @@ const RolePicker = ({selectedRole, roles, handleRolePick, visible}) => {
                 selected={selectedRole && (selectedRole.id === role.id)}>
 
                 {role.name}
-            </RoleOption>)}
+            </RoleSpan>)}
     </div>
 };
 

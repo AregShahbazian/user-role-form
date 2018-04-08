@@ -5,12 +5,12 @@ import User from "./User";
 import RolePickerContainer from "../containers/RolePickerContainer";
 import RoleDeleterContainer from "../containers/RoleDeleterContainer";
 
-const Tr = styled.tr`
+const UserRoleRowTr = styled.tr`
     line-height: 3em;
 `;
 
 const UserRoleRow = ({projectUserRoleId, projectUser, selectedRole, onRolePick}) => (
-    <Tr>
+    <UserRoleRowTr>
         <td>
             <User projectUser={projectUser}/>
         </td>
@@ -20,7 +20,7 @@ const UserRoleRow = ({projectUserRoleId, projectUser, selectedRole, onRolePick})
         <td>
             <RoleDeleterContainer projectUserRoleId={projectUserRoleId}/>
         </td>
-    </Tr>
+    </UserRoleRowTr>
 );
 
 UserRoleRow.propTypes = {

@@ -4,21 +4,18 @@ import styled from 'styled-components';
 import UserRoleRowContainer from "../containers/UserRoleRowContainer";
 
 const Table = styled.table`
+    position: relative;
     table-layout: auto;
     width: 100%;
+    
+    opacity:  ${props => !props.loading ? "1.0" : "0.3"};
 `;
 
 const UserRoleTable = ({show, projectUserRoles, loading, error}) => (
     show && <div>
-        {(loading &&
-            <p>Loading...</p>)
-        || (!!projectUserRoles.length &&
-            <Table>
+        {(!!projectUserRoles.length &&
+            <Table loading={loading}>
                 <tbody>
-                <tr>
-                    <th>User</th>
-                    <th>Role</th>
-                </tr>
                 {projectUserRoles.map(projectUserRole =>
                     <UserRoleRowContainer key={projectUserRole.id} {...projectUserRole}/>)}
                 </tbody>
