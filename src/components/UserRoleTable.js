@@ -1,13 +1,19 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import styled from 'styled-components';
 import UserRoleRowContainer from "../containers/UserRoleRowContainer";
+
+const Table = styled.table`
+    table-layout: auto;
+    width: 100%;
+`;
 
 const UserRoleTable = ({show, projectUserRoles, loading, error}) => (
     show && <div>
         {(loading &&
             <p>Loading...</p>)
         || (!!projectUserRoles.length &&
-            <table>
+            <Table>
                 <tbody>
                 <tr>
                     <th>User</th>
@@ -16,7 +22,7 @@ const UserRoleTable = ({show, projectUserRoles, loading, error}) => (
                 {projectUserRoles.map(projectUserRole =>
                     <UserRoleRowContainer key={projectUserRole.id} {...projectUserRole}/>)}
                 </tbody>
-            </table>)
+            </Table>)
         ||
         <p>
             No user-roles defined for selected project

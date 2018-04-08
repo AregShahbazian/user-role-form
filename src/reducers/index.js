@@ -3,7 +3,7 @@ import {combineReducers} from "redux";
 import {reducer as formReducer} from "redux-form";
 import update from "immutability-helper"
 import {merge, reduce, union} from "lodash";
-import {combineActions, handleAction, handleActions} from "redux-actions";
+import {combineActions, handleActions} from "redux-actions";
 import routines from "../actions/index";
 
 // NOTE: lodash merge performs recursively, and could slow down performance

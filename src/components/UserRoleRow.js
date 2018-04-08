@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import styled from 'styled-components';
 import User from "./User";
 import RolePickerContainer from "../containers/RolePickerContainer";
 import RoleDeleterContainer from "../containers/RoleDeleterContainer";
 
+const Tr = styled.tr`
+    line-height: 3em;
+`;
+
 const UserRoleRow = ({projectUserRoleId, projectUser, selectedRole, onRolePick}) => (
-    <tr>
+    <Tr>
         <td>
             <User projectUser={projectUser}/>
         </td>
@@ -15,7 +20,7 @@ const UserRoleRow = ({projectUserRoleId, projectUser, selectedRole, onRolePick})
         <td>
             <RoleDeleterContainer projectUserRoleId={projectUserRoleId}/>
         </td>
-    </tr>
+    </Tr>
 );
 
 UserRoleRow.propTypes = {
