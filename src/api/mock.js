@@ -59,37 +59,36 @@ mock.onGet('/projectUserRoles?project=2').reply(200, [
     projectUserRoles["222"]]);
 mock.onGet('/projectUserRoles?project=3').reply(200, []);
 
-forEach(Object.keys(roles), roleId => {
-    forEach(Object.keys(projectUserRoles), id => {
+forEach(Object.values(roles), role => {
+    forEach(Object.values(projectUserRoles), projectUserRole => {
         /* Mock PATCH'ing every combination of projectUserRoles and new roles */
-        mock.onPatch(`/projectUserRoles/${id}`,
+        mock.onPatch(`/projectUserRoles/${projectUserRole.id}`,
             {
-                role: roleId
+                role: role.id
             }).reply(200,
             {
-                ...projectUserRoles[id],
-                role: roles[roleId]
+                ...projectUserRole,
+                role: role
             });
 
-        mock.onDelete(`/projectUserRoles/${id}`).reply(200, projectUserRoles[id]);
+        mock.onDelete(`/projectUserRoles/${projectUserRole.id}`).reply(200, projectUserRole);
     });
 
-    forEach(Object.keys(users), userId => {
-        forEach(Object.keys(projects), projectId => {
+    forEach(Object.values(users), user => {
+        forEach(Object.values(projects), project => {
             mock.onPost("/projectUserRoles",
                 {
-                    project: projectId,
-                    user: userId,
-                    role: roleId
+                    project: project.id,
+                    user: user.id,
+                    role: role.id
                 }).reply(200,
                 {
-                    id: `${projectId}${userId}${roleId}`,
-                    project: projectId,
-                    user: userId,
-                    role: roleId
+                    id: Number(`${project.id}${user.id}${role.id}`),
+                    project: project,
+                    user: user,
+                    role: role
                 });
         })
     })
 
 });
-

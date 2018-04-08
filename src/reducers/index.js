@@ -3,7 +3,7 @@ import {combineReducers} from "redux";
 import {reducer as formReducer} from "redux-form";
 import update from "immutability-helper"
 import {merge, reduce, union} from "lodash";
-import {combineActions, handleActions} from "redux-actions";
+import {combineActions, handleAction, handleActions} from "redux-actions";
 import routines from "../actions/index";
 
 // NOTE: lodash merge performs recursively, and could slow down performance
@@ -44,7 +44,7 @@ export const replaceStateWithEntities = (state, payload) => {
     return {...state, entities: payload.entities, result: payload.result}
 }
 
-export const updateTableState = (state, loading) => {
+export const setLoadingState = (state, loading) => {
     return {...state, loading: loading}
 }
 
@@ -53,27 +53,35 @@ export const updateTableState = (state, loading) => {
  * @param entityRoutines
  * @param initialState
  */
-export const createEntityDataReducers = (entityRoutines, initialState) => handleActions({
+const createEntityDataReducers = (entityRoutines, initialState) => handleActions({
     /* REQUEST */
     [combineActions(
-        entityRoutines.FETCH.request)]
+        entityRoutines.FETCH.request,
+        entityRoutines.CREATE.request,
+        entityRoutines.UPDATE.request)]
         (state, action) {
-        return updateTableState(state, true)
+        return setLoadingState(state, true)
     },
     /* SUCCESS */
     [combineActions(
         entityRoutines.FETCH.success)]
         (state, action) {
-        return updateTableState(replaceStateWithEntities(state, action.payload), false)
+        return setLoadingState(replaceStateWithEntities(state, action.payload), false)
     },
     [combineActions(
         entityRoutines.FETCH_BY_ID.success,
         entityRoutines.CREATE.success,
         entityRoutines.UPDATE.success)]
         (state, action) {
-        return mergeEntityIntoState(state, action.payload);
+        return setLoadingState(mergeEntityIntoState(state, action.payload), false);
     }
 }, initialState);
+
+const createUserPickerFormReducers = handleAction(
+    routines.PROJECT_USER_ROLES.CREATE.trigger,
+    (state, action) => {
+        return {}
+    }, {})
 
 /**
  * Creates crud-reducers, create-form reducers, and update-form reducers, for each entity in domainConfigs.
@@ -86,5 +94,5 @@ let entityDataReducers = reduce(config, (reducers, entityConfig, entityName) => 
 
 export default combineReducers({
     ...entityDataReducers,
-    form: formReducer
+    form: formReducer.plugin({userPicker: createUserPickerFormReducers})
 })

@@ -34,5 +34,5 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(reduxForm({
-    form: "projectSelect"
+    form: "projectPicker"
 })(ProjectPickerContainer))

@@ -15,10 +15,11 @@ const mapDispatchToProps = ({
 });
 
 class UserRoleTableContainer extends React.Component {
+
+
     render() {
-        return this.props.projectId ?
-            <UserRoleTable projectUserRoles={this.props.projectUserRoles} loading={this.props.loadingProjectUserRoles}/>
-            : (null)
+        return <UserRoleTable show={!!this.props.projectId} projectUserRoles={this.props.projectUserRoles}
+                              loading={this.props.loadingProjectUserRoles}/>
     }
 
     componentWillMount() {
