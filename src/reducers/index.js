@@ -104,11 +104,14 @@ const createEntityDataReducers = (entityRoutines, initialState) => handleActions
     }
 }, initialState);
 
-const createUserPickerFormReducers = handleAction(
-    routines.PROJECT_USER_ROLES.CREATE.trigger,
-    (state, action) => {
+const createUserPickerFormReducers = handleActions({
+    [combineActions(
+        routines.PROJECT_USER_ROLES.CREATE.trigger,
+        routines.PROJECT_USER_ROLES.FETCH.trigger)]
+        (state, action) {
         return {}
-    }, {})
+    }
+}, {});
 
 /**
  * Creates crud-reducers, create-form reducers, and update-form reducers, for each entity in domainConfigs.
