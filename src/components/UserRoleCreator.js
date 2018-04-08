@@ -6,7 +6,7 @@ import RolePickerContainer from "../containers/RolePickerContainer";
 const UserRoleCreator = ({show, selectedUserId, addRole}) => (
     show && <div>
         <UserPickerContainer/>
-        <RolePickerContainer onPick={addRole} visible={!!selectedUserId}/>
+        <RolePickerContainer handleRolePick={addRole} visible={!!selectedUserId}/>
     </div>
 );
 

@@ -66,6 +66,9 @@ export const createWatcherSagas = (domainConfigs, routines, apiFunctions) => {
 
             update: watchAction.bind(null, routines[entityConfig.routineName].UPDATE.TRIGGER,
                 makeApiCall.bind(null, routines[entityConfig.routineName].UPDATE, apiFunctions[entityName].update)),
+
+            delete: watchAction.bind(null, routines[entityConfig.routineName].DELETE.TRIGGER,
+                makeApiCall.bind(null, routines[entityConfig.routineName].DELETE, apiFunctions[entityName].delete))
         }
         return watchers
     }, {})

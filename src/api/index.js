@@ -8,6 +8,7 @@ import "./mock"
 export const GET = 'get'
 export const POST = 'post'
 export const PATCH = 'patch'
+export const DELETE = 'delete'
 
 axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -30,7 +31,7 @@ export const createRequest = (endpoint, method, payload, id) => {
     let queryParameters = "";
     let requestBody
 
-    if (method === GET) {
+    if (method === GET || method === DELETE) {
         queryParameters += !$.isEmptyObject(payload) ? "?" + $.param(payload) : ""
         requestBody = undefined
     } else {
@@ -79,6 +80,7 @@ export const createApiFunctions = (config) => reduce(config, (acc, val, key) => 
         fetch: callApi.bind(null, val.endpoint, new schema.Array(val.schema), GET),
         create: callApi.bind(null, val.endpoint, val.schema, POST),
         update: callApi.bind(null, val.endpoint, val.schema, PATCH),
+        delete: callApi.bind(null, val.endpoint, val.schema, DELETE)
     }
     return acc
 }, {})

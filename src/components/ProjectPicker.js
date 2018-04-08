@@ -28,7 +28,7 @@ const ProjectPicker = ({projects, loading, handleSelect}) => (
             <Field
                 name="project"
                 component={renderDropdownList}
-                data={Object.values(projects)}
+                data={projects}
                 loading={loading}
                 handleChange={handleSelect}
             />
@@ -37,7 +37,7 @@ const ProjectPicker = ({projects, loading, handleSelect}) => (
 );
 
 ProjectPicker.propTypes = {
-    projects: PropTypes.object.isRequired,
+    projects: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
     handleSelect: PropTypes.func.isRequired
 };

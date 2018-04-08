@@ -1,16 +1,19 @@
 
-Create add-role component
 
 style-components
 
 create e2e tests
 
-remove non-user entities from store
-    !main ops are on user
-
 clean up unused map**toprops functions
 
 check unit test coverage and quality
+
+check documentation
+
+check unused routines/api functions
+
+
+
 
 *** HISTORY ***
 
@@ -39,3 +42,19 @@ create UI components
 Component hierarchy:
 
 use selectors in containers
+
+Create add-role component
+
+delete-button
+    delete removes the object from result-array
+    fix fetching, get cached from result-array, not directly from entities
+    * delete child-entities too:
+        After deleting a role, the list of available users is not updated. This is because only the normalized
+        projectUserRole entity is deleted, and the related child-entities are not cascaded
+    ** OR BETTER
+        select usersWithoutRole not from projectUserRoles.entities.users, but from projectUserRoles.results=>user
+
+Handle network errors
+    like 404
+    for projectUserRoles Create, Update and Delete ops
+

@@ -42,11 +42,15 @@ export const deleteEntityFromState = (state, payload) => {
  */
 export const replaceStateWithEntities = (state, payload) => {
     return {...state, entities: payload.entities, result: payload.result}
-}
+};
+
+export const setErrorState = (state, payload) => {
+    return update(state, {error: {$set: payload}})
+};
 
 export const setLoadingState = (state, loading) => {
     return {...state, loading: loading}
-}
+};
 
 /**
  * Reducers for entity-state
@@ -58,7 +62,8 @@ const createEntityDataReducers = (entityRoutines, initialState) => handleActions
     [combineActions(
         entityRoutines.FETCH.request,
         entityRoutines.CREATE.request,
-        entityRoutines.UPDATE.request)]
+        entityRoutines.UPDATE.request,
+        entityRoutines.DELETE.request)]
         (state, action) {
         return setLoadingState(state, true)
     },
@@ -66,14 +71,36 @@ const createEntityDataReducers = (entityRoutines, initialState) => handleActions
     [combineActions(
         entityRoutines.FETCH.success)]
         (state, action) {
-        return setLoadingState(replaceStateWithEntities(state, action.payload), false)
+        return replaceStateWithEntities(state, action.payload);
     },
     [combineActions(
         entityRoutines.FETCH_BY_ID.success,
         entityRoutines.CREATE.success,
         entityRoutines.UPDATE.success)]
         (state, action) {
-        return setLoadingState(mergeEntityIntoState(state, action.payload), false);
+        return mergeEntityIntoState(state, action.payload);
+    },
+    [entityRoutines.DELETE.success]
+        (state, action) {
+        return deleteEntityFromState(state, action.payload);
+    },
+    [combineActions(
+        entityRoutines.FETCH_BY_ID.failure,
+        entityRoutines.FETCH.failure,
+        entityRoutines.CREATE.failure,
+        entityRoutines.UPDATE.failure,
+        entityRoutines.DELETE.failure)]
+        (state, action) {
+        return setLoadingState(setErrorState(state, action.payload), false);
+    },
+    [combineActions(
+        entityRoutines.FETCH_BY_ID.success,
+        entityRoutines.FETCH.success,
+        entityRoutines.CREATE.success,
+        entityRoutines.UPDATE.success,
+        entityRoutines.DELETE.success)]
+        (state, action) {
+        return setLoadingState(setErrorState(state, undefined), false);
     }
 }, initialState);
 

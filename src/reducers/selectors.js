@@ -1,17 +1,31 @@
-export const getAllRoles = (state) => state.roles.entities.roles || {}
+import {concat, forEach} from "lodash";
+
+export const getAllEntities = (state, entityName) => {
+    return getEntitiesWithIds(state, entityName, state[entityName].result)
+};
+
+export const getEntitiesWithIds = (state, entityName, ids) => {
+    let cachedEntities = []
+    forEach(ids, (id) => {
+        cachedEntities = concat(cachedEntities, state[entityName].entities[entityName][id])
+    });
+    return cachedEntities
+};
 
 export const getSelectedProjectId = (state) => state.form.projectPicker.values ? state.form.projectPicker.values.project.id : undefined;
+
 export const getSelectedUserId = (state) => state.form.userPicker && state.form.userPicker.values ?
     state.form.userPicker.values.user.id : undefined;
-export const getProjectUserRoles = (state) => state.projectUserRoles.entities.projectUserRoles;
-export const usersWithoutRole = (state) => {
-    let users = state.users.entities.users || {};
-    let projectUsers = state.projectUserRoles.entities.users || {};
-    let usersWithoutRole = {};
-    Object.keys(users).forEach(id => {
-        if (!projectUsers.hasOwnProperty(id)) {
-            usersWithoutRole[id] = users[id];
-        }
+
+export const getUsersWithoutRole = (state) => {
+    let allUsersIds = state.users.result;
+
+    let userIdsWithRole = [];
+    let projectUserRoles = getAllEntities(state, "projectUserRoles");
+    projectUserRoles.forEach(projectUserRole => {
+        userIdsWithRole = concat(userIdsWithRole, projectUserRole.user)
     });
-    return usersWithoutRole
+
+    let userIdsWithoutRole = allUsersIds.filter(id => !userIdsWithRole.includes(id))
+    return getEntitiesWithIds(state, "users", userIdsWithoutRole)
 }

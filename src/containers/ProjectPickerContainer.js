@@ -3,9 +3,10 @@ import {connect} from "react-redux";
 import {reduxForm} from "redux-form";
 import routines from "../actions/index"
 import ProjectPicker from "../components/ProjectPicker";
+import {getAllEntities} from "../reducers/selectors";
 
 const mapStateToProps = (state) => ({
-    projects: state.projects.entities.projects || {},
+    projects: getAllEntities(state, "projects"),
     loading: state.projects.loading
 });
 

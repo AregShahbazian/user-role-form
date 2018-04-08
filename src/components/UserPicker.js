@@ -25,7 +25,7 @@ const UserPicker = ({users, loading}) => (
             <Field
                 name="user"
                 component={renderDropdownList}
-                data={Object.values(users)}
+                data={users}
                 loading={loading}
             />
         </form>
@@ -33,7 +33,7 @@ const UserPicker = ({users, loading}) => (
 );
 
 UserPicker.propTypes = {
-    users: PropTypes.object.isRequired,
+    users: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
 };
 

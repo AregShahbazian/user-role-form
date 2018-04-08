@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-const RolePicker = ({selectedRole, roles, onPick, visible}) => (
+const RolePicker = ({selectedRole, roles, handleRolePick, visible}) => (
     <div>
-        {visible && Object.values(roles).map(role =>
-            <span key={role.id} onClick={() => onPick(role.id)}
+        {visible && roles.map(role =>
+            <span key={role.id} onClick={() => handleRolePick(role.id)}
                   className={selectedRole && (selectedRole.id === role.id) ? "selected" : ""}>{role.name}
                       </span>)}
     </div>
@@ -12,8 +12,8 @@ const RolePicker = ({selectedRole, roles, onPick, visible}) => (
 
 RolePicker.propTypes = {
     selectedRole: PropTypes.object,
-    roles: PropTypes.object.isRequired,
-    onPick: PropTypes.func.isRequired,
+    roles: PropTypes.array.isRequired,
+    handleRolePick: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired
 };
 

@@ -2,11 +2,11 @@ import React from 'react';
 import {connect} from "react-redux";
 import {reduxForm} from "redux-form";
 import routines from "../actions/index"
-import {usersWithoutRole} from "../reducers/selectors";
+import {getUsersWithoutRole} from "../reducers/selectors";
 import UserPicker from "../components/UserPicker";
 
 const mapStateToProps = (state) => ({
-    users: usersWithoutRole(state),
+    usersWithoutRole: getUsersWithoutRole(state),
     loading: state.users.loading,
 });
 
@@ -17,8 +17,8 @@ const mapDispatchToProps = ({
 
 class UserPickerContainer extends React.Component {
     render() {
-        const {users, loading} = this.props;
-        return <UserPicker users={users} loading={loading}/>
+        const {usersWithoutRole, loading} = this.props;
+        return <UserPicker users={usersWithoutRole} loading={loading}/>
     }
 
     componentWillMount() {
