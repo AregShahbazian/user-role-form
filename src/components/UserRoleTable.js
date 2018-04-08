@@ -13,7 +13,7 @@ const Table = styled.table`
 
 const UserRoleTable = ({show, projectUserRoles, loading, error}) => (
     show && <div>
-        {(!!projectUserRoles.length &&
+        {((loading || !!projectUserRoles.length) &&
             <Table loading={loading}>
                 <tbody>
                 {projectUserRoles.map(projectUserRole =>

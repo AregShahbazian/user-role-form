@@ -19,17 +19,16 @@ const renderDropdownList = ({input, data, loading}) =>
 
 
 const UserPicker = ({users, loading}) => (
-    <div>
-        <form>
-            <label>User </label>
+    <form>
+        <label>Add role for user </label>
+        <div>
             <Field
                 name="user"
                 component={renderDropdownList}
                 data={users}
-                loading={loading}
-            />
-        </form>
-    </div>
+                loading={loading}/>
+        </div>
+    </form>
 );
 
 UserPicker.propTypes = {

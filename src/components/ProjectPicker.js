@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {DropdownList} from 'react-widgets';
 import {Field} from "redux-form";
+import {DropDownListField, DropDownListForm} from "./ProjectPicker.styled";
 
 const renderDropdownList = ({input, data, loading, handleChange}) =>
     <DropdownList {...input}
@@ -20,20 +21,18 @@ const renderDropdownList = ({input, data, loading, handleChange}) =>
                       handleChange(e)
                   }}/>
 
-
 const ProjectPicker = ({projects, loading, handleSelect}) => (
-    <div>
-        <form>
-            <label>Project </label>
+    <DropDownListForm>
+        <label>Project </label>
+        <DropDownListField>
             <Field
                 name="project"
                 component={renderDropdownList}
                 data={projects}
                 loading={loading}
-                handleChange={handleSelect}
-            />
-        </form>
-    </div>
+                handleChange={handleSelect}/>
+        </DropDownListField>
+    </DropDownListForm>
 );
 
 ProjectPicker.propTypes = {

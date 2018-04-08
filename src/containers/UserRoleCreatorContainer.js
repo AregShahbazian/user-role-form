@@ -23,7 +23,7 @@ class UserRoleCreatorContainer extends React.Component {
 
     render() {
         const {projectId, userId} = this.props;
-        return <UserRoleCreator show={!!projectId} selectedUserId={userId} addRole={this.addRole}/>
+        return <UserRoleCreator visible={!!projectId} selectedUserId={userId} addRole={this.addRole}/>
     }
 }
 
