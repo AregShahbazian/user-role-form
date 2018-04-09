@@ -2,6 +2,15 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {DropdownList} from 'react-widgets';
 import {Field} from "redux-form";
+import styled from 'styled-components';
+
+const UserPickerForm = styled.form`
+    min-width: 150px;
+    max-width: 200px;
+    flex-grow: 1;
+    margin-left: 1em;
+`;
+
 
 const renderDropdownList = ({input, data, loading}) =>
     <DropdownList {...input}
@@ -19,8 +28,7 @@ const renderDropdownList = ({input, data, loading}) =>
 
 
 const UserPicker = ({users, loading}) => (
-    <form>
-        <label>Add role for user </label>
+    <UserPickerForm>
         <div>
             <Field
                 name="user"
@@ -28,7 +36,7 @@ const UserPicker = ({users, loading}) => (
                 data={users}
                 loading={loading}/>
         </div>
-    </form>
+    </UserPickerForm>
 );
 
 UserPicker.propTypes = {

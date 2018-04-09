@@ -1,7 +1,30 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import UserRoleRowContainer from "../containers/UserRoleRowContainer";
-import {Table} from "./styled/UserRoleTable.styled";
+import styled from 'styled-components';
+
+const Table = styled.table`
+    position: relative;
+    table-layout: auto;
+    width: 100%;
+    margin-bottom: 2em;
+    
+    opacity:  ${props => !props.loading ? "1.0" : "0.3"};
+`;
+
+
+const NoUserP = styled.p`
+    display: table;
+    margin: 1em auto;
+    font-size: 14px;
+`;
+
+
+const ErrorP = styled.p`
+    display: table;
+    margin: 0 auto;
+    color: red;
+`;
 
 const UserRoleTable = ({show, projectUserRoles, loading, error}) => (
     show && <div>
@@ -13,11 +36,11 @@ const UserRoleTable = ({show, projectUserRoles, loading, error}) => (
                 </tbody>
             </Table>)
         ||
-        <p>
+        <NoUserP>
             No user-roles defined for selected project
-        </p>
+        </NoUserP>
         }
-        {error && <p>Oops .. an error occurred</p>}
+        {error && <ErrorP>Oops .. an error occurred</ErrorP>}
     </div>
 );
 

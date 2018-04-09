@@ -1,6 +1,33 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import {RolePickerDiv, RoleSpan} from "./styled/RolePicker.styled";
+import styled from 'styled-components';
+
+const RolePickerDiv = styled.div`
+    flex: 2 0 auto;
+    margin-left: 1em;
+    display:  ${props => !props.visible && "none"};
+`;
+
+const RoleSpan = styled.span`
+    --main-color: #333;
+  
+    border: solid var(--main-color) 1px;
+    border-left-style: ${props => props.first ? "solid" : "none"};
+    border-top-left-radius:  ${props => props.first ? "8px" : 0};
+    border-bottom-left-radius:  ${props => props.first ? "8px" : 0};
+    border-top-right-radius:  ${props => props.last ? "8px" : 0};
+    border-bottom-right-radius:  ${props => props.last ? "8px" : 0};
+    
+    padding: 0 0.2em;
+    
+    background-color:  ${props => props.selected && "var(--main-color)"};
+    color:  ${props => props.selected ? "#fff" : "var(--main-color)"};
+    
+    &:hover{
+        background-color: #eee;
+        cursor: pointer;    
+    }
+`;
 
 const RolePicker = ({selectedRole, roles, handleRolePick, visible}) => {
     return <RolePickerDiv visible={visible}>

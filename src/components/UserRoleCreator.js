@@ -2,13 +2,26 @@ import React from 'react';
 import PropTypes from "prop-types";
 import UserPickerContainer from "../containers/UserPickerContainer";
 import RolePickerContainer from "../containers/RolePickerContainer";
-import {UserRoleCreatorDiv} from "./styled/UserRoleCreator.styled";
+import styled from 'styled-components';
 
+const UserRoleCreatorDiv = styled.div`
+    display:  ${props => !props.visible && "none"};
+`;
+
+const UserRoleCreatorRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+`;
 
 const UserRoleCreator = ({visible, selectedUserId, addRole}) => (
     <UserRoleCreatorDiv visible={visible}>
-        <UserPickerContainer/>
-        <RolePickerContainer handleRolePick={addRole} visible={!!selectedUserId}/>
+        <p>Add new role for user:</p>
+        <UserRoleCreatorRow>
+            <UserPickerContainer/>
+            <RolePickerContainer handleRolePick={addRole} visible={!!selectedUserId}/>
+        </UserRoleCreatorRow>
     </UserRoleCreatorDiv>
 );
 

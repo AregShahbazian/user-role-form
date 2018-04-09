@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import User from "./User";
 import RolePickerContainer from "../containers/RolePickerContainer";
 import RoleDeleterContainer from "../containers/RoleDeleterContainer";
-import {UserRoleRowTr} from "./styled/UserRoleRow.styled";
+import styled from 'styled-components';
+
+const UserRoleRowTr = styled.tr`
+    line-height: 3em;
+`;
 
 const UserRoleRow = ({projectUserRoleId, projectUser, selectedRole, onRolePick}) => (
     <UserRoleRowTr>
