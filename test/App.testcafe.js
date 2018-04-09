@@ -85,7 +85,7 @@ test("Test adding new row to table", async t => {
         // check that the role-picker in the user-role-creator is visible
         .expect(page.userRoleCreator.rolePicker.body.visible).ok()
         // click on role 3
-        .click(page.userRoleCreator.rolePicker.getRolePickerOption(ROLE_NAME_2).body)
+        .click(page.userRoleCreator.rolePicker.getRolePickerOption(ROLE_NAME_3).body)
         // check that user picker is cleared
         .expect(page.userRoleCreator.userPicker.dropDownList.getDropdownListInput().body.innerText).eql("")
         // check that the role-picker in the user-role-creator is not visible
@@ -106,32 +106,45 @@ test("Test adding new row to table", async t => {
 test("Test editing and deleting row", async t => {
     await t
     // click on project-picker
-    // choose project 1
-    // click on role 2 in row 111
-    // check that role 2 in row 111 is selected
-    // click on delete button of row 122
-    // check that row 122 is not displayed
-    // click on user picker
-    // check that Bob and Alice rows are available
+        .click(page.projectPicker.dropDownList.body)
+        // choose project 1
+        .click(page.projectPicker.dropDownList.getDropdownListOption(PROJECT_NAME_1).body)
+        // click on role 2 in row 111
+        .click(page.userRoleTable.getUserRoleRow(PROJECT_USER_ROLE_ID_111).rolePicker.getRolePickerOption(ROLE_NAME_2).body)
+        // check that role 2 in row 111 is selected
+        .expect(page.userRoleTable.getUserRoleRow(PROJECT_USER_ROLE_ID_111).rolePicker
+            .getSelectedRolePickerOption().body.innerText).eql(ROLE_NAME_2)
+        // click on delete button of row 122
+        .click(page.userRoleTable.getUserRoleRow(PROJECT_USER_ROLE_ID_122).roleDeleter.body)
+        // check that row 122 doesnt exist anymore
+        .expect(page.userRoleTable.getUserRoleRow(PROJECT_USER_ROLE_ID_122).body.exists).notOk()
+        // click on user picker
+        .click(page.userRoleCreator.userPicker.dropDownList.body)
+        // check that Bob and Alice rows are available
+        .expect(page.userRoleCreator.userPicker.dropDownList.getDropdownListOption(USER_NAME_2).body.exists).ok()
+        .expect(page.userRoleCreator.userPicker.dropDownList.getDropdownListOption(USER_NAME_3).body.exists).ok()
+        .expect(page.userRoleCreator.userPicker.dropDownList.numberOfDropdownListOptions()).eql(2)
 });
 
 test("Test something to cause error", async t => {
     await t
     // click on project-picker
-    // choose project 1
-    // click on user picker
-    // click on the Bob option
-    // click on role 3
-    // click on delete button of row 133
-    // check that row 133 is not deleted
-    // check that error-message is displayed
+        .click(page.projectPicker.dropDownList.body)
+        // choose project 1
+        .click(page.projectPicker.dropDownList.getDropdownListOption(PROJECT_NAME_1).body)
+        // click on user picker
+        .click(page.userRoleCreator.userPicker.dropDownList.body)
+        // click on the Bob option
+        .click(page.userRoleCreator.userPicker.dropDownList.getDropdownListOption(USER_NAME_3).body)
+        // click on role 3
+        .click(page.userRoleCreator.rolePicker.getRolePickerOption(ROLE_NAME_3).body)
+        // click on delete button of row 133
+        .click(page.userRoleTable.getUserRoleRow(PROJECT_USER_ROLE_ID_133).roleDeleter.body)
+        // check that row 133 is not deleted
+        .expect(page.userRoleTable.getUserRoleRow(PROJECT_USER_ROLE_ID_133).body.exists).ok()
+        // check that error-message is displayed
+        .expect(page.errorP.body.visible).ok()
 });
-
-
-test.only('Test adding new row to table', () => {
-});
-
-
 
 
 
