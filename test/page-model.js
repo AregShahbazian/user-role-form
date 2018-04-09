@@ -6,6 +6,12 @@ class DropdownListOption {
     }
 }
 
+class DropdownListInput {
+    constructor(parent) {
+        this.body = parent.find(".rw-dropdown-list-input");
+    }
+}
+
 class DropDowList {
     constructor(parent) {
         this.body = parent.find(".rw-dropdown-list");
@@ -13,6 +19,10 @@ class DropDowList {
 
     getDropdownListOption(text) {
         return new DropdownListOption(this.body, text);
+    }
+
+    getDropdownListInput() {
+        return new DropdownListInput(this.body);
     }
 
     numberOfDropdownListOptions() {
