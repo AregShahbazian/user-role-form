@@ -29,10 +29,11 @@ const RoleSpan = styled.span`
     }
 `;
 
-const RolePicker = ({selectedRole, roles, handleRolePick, visible}) => {
-    return <RolePickerDiv visible={visible}>
+const RolePicker = ({selectedRole, roles, handleRolePick, visible}) => (
+    <RolePickerDiv className="role-picker" visible={visible}>
         {roles.map(role =>
             <RoleSpan
+                className="role-picker-option"
                 key={role.id}
                 onClick={() => handleRolePick(role.id)}
                 first={roles.indexOf(role) === 0}
@@ -42,8 +43,7 @@ const RolePicker = ({selectedRole, roles, handleRolePick, visible}) => {
 
                 {role.name}
             </RoleSpan>)}
-    </RolePickerDiv>
-};
+    </RolePickerDiv>)
 
 RolePicker.propTypes = {
     selectedRole: PropTypes.object,

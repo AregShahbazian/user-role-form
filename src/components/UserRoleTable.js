@@ -17,6 +17,7 @@ const NoUserP = styled.p`
     display: table;
     margin: 1em auto;
     font-size: 14px;
+    display:  ${props => !props.visible && "none"};
 `;
 
 
@@ -24,28 +25,33 @@ const ErrorP = styled.p`
     display: table;
     margin: 0 auto;
     color: red;
+    display:  ${props => !props.visible && "none"};
 `;
 
-const UserRoleTable = ({show, projectUserRoles, loading, error}) => (
-    show && <div>
-        {((loading || !!projectUserRoles.length) &&
-            <Table loading={loading}>
-                <tbody>
-                {projectUserRoles.map(projectUserRole =>
-                    <UserRoleRowContainer key={projectUserRole.id} {...projectUserRole}/>)}
-                </tbody>
-            </Table>)
-        ||
-        <NoUserP>
+const UserRoleTableDiv = styled.div`
+    display:  ${props => !props.visible && "none"};
+`;
+
+const UserRoleTable = ({visible, projectUserRoles, loading, error}) => {
+    let displayTable = loading || !!projectUserRoles.length;
+
+    return <UserRoleTableDiv className="user-role-table-div" visible={visible}>
+        <Table loading={loading} visible={displayTable}>
+            <tbody>
+            {projectUserRoles.map(projectUserRole =>
+                <UserRoleRowContainer key={projectUserRole.id} {...projectUserRole}/>)}
+            </tbody>
+        </Table>
+        <NoUserP className="no-user-p" visible={!displayTable}>
             No user-roles defined for selected project
         </NoUserP>
-        }
-        {error && <ErrorP>Oops .. an error occurred</ErrorP>}
-    </div>
-);
+
+        <ErrorP className="error-p" visible={!!error}>Oops .. an error occurred</ErrorP>
+    </UserRoleTableDiv>
+};
 
 UserRoleTable.propTypes = {
-    show: PropTypes.bool.isRequired,
+    visible: PropTypes.bool.isRequired,
     projectUserRoles: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.object

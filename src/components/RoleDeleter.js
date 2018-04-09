@@ -16,7 +16,7 @@ const DeleteSpan = styled.span`
 `;
 
 const RoleDeleter = ({handleDeleteClick}) => (
-    <DeleteSpan onClick={handleDeleteClick}>
+    <DeleteSpan className="role-deleter" onClick={handleDeleteClick}>
         Delete
     </DeleteSpan>
 );

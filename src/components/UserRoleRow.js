@@ -10,7 +10,7 @@ const UserRoleRowTr = styled.tr`
 `;
 
 const UserRoleRow = ({projectUserRoleId, projectUser, selectedRole, onRolePick}) => (
-    <UserRoleRowTr>
+    <UserRoleRowTr className="user-role-row">
         <td>
             <User projectUser={projectUser}/>
         </td>

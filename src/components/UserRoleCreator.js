@@ -16,7 +16,7 @@ const UserRoleCreatorRow = styled.div`
 `;
 
 const UserRoleCreator = ({visible, selectedUserId, addRole}) => (
-    <UserRoleCreatorDiv visible={visible}>
+    <UserRoleCreatorDiv className="user-role-creator" visible={visible}>
         <p>Add new role for user:</p>
         <UserRoleCreatorRow>
             <UserPickerContainer/>

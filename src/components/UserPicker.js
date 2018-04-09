@@ -28,7 +28,7 @@ const renderDropdownList = ({input, data, loading}) =>
 
 
 const UserPicker = ({users, loading}) => (
-    <UserPickerForm>
+    <UserPickerForm className="user-picker">
         <div>
             <Field
                 name="user"

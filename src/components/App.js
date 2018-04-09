@@ -9,7 +9,7 @@ const AppDiv = styled.div`
 `;
 
 const App = () => (
-    <AppDiv>
+    <AppDiv className="app">
         <ProjectPickerContainer/>
         <UserRoleTableContainer/>
         <UserRoleCreatorContainer/>
