@@ -1,66 +1,60 @@
 import {normalize, schema} from "normalizr";
-import apiFunctions, {
-    createApiFunctions,
-    createRequest,
-    GET,
-    PATCH,
-    POST,
-} from "./index";
+import {createApiFunctions, createRequestObject, GET, PATCH, POST,} from "./index";
 
-describe('createRequest', () => {
+describe('createRequestObject', () => {
 
     it("should create correct GET requests", () => {
-        expect(createRequest("myEntity", GET, {}, undefined)).toEqual({
+        expect(createRequestObject("myEntity", GET, {}, undefined)).toEqual({
             fullEndpoint: "myEntity",
             requestBody: undefined
         })
-        expect(createRequest("myEntity", GET, {foo: "Foo", bar: "Bar"}, undefined)).toEqual({
+        expect(createRequestObject("myEntity", GET, {foo: "Foo", bar: "Bar"}, undefined)).toEqual({
             fullEndpoint: "myEntity?foo=Foo&bar=Bar",
             requestBody: undefined
         })
-        expect(createRequest("myEntity", GET, {}, 1)).toEqual({
+        expect(createRequestObject("myEntity", GET, {}, 1)).toEqual({
             fullEndpoint: "myEntity/1",
             requestBody: undefined
         })
-        expect(createRequest("myEntity", GET, {foo: "Foo", bar: "Bar"}, 1)).toEqual({
+        expect(createRequestObject("myEntity", GET, {foo: "Foo", bar: "Bar"}, 1)).toEqual({
             fullEndpoint: "myEntity/1?foo=Foo&bar=Bar",
             requestBody: undefined
         })
     })
 
     it("should create correct POST requests", () => {
-        expect(createRequest("myEntity", POST, {}, undefined)).toEqual({
+        expect(createRequestObject("myEntity", POST, {}, undefined)).toEqual({
             fullEndpoint: "myEntity",
             requestBody: {}
         })
-        expect(createRequest("myEntity", POST, {foo: "Foo", bar: "Bar"}, undefined)).toEqual({
+        expect(createRequestObject("myEntity", POST, {foo: "Foo", bar: "Bar"}, undefined)).toEqual({
             fullEndpoint: "myEntity",
             requestBody: {foo: "Foo", bar: "Bar"}
         })
-        expect(createRequest("myEntity", POST, {}, 1)).toEqual({
+        expect(createRequestObject("myEntity", POST, {}, 1)).toEqual({
             fullEndpoint: "myEntity",
             requestBody: {}
         })
-        expect(createRequest("myEntity", POST, {foo: "Foo", bar: "Bar"}, 1)).toEqual({
+        expect(createRequestObject("myEntity", POST, {foo: "Foo", bar: "Bar"}, 1)).toEqual({
             fullEndpoint: "myEntity",
             requestBody: {foo: "Foo", bar: "Bar"}
         })
     })
 
     it("should create correct PATCH requests", () => {
-        expect(createRequest("myEntity", PATCH, {}, undefined)).toEqual({
+        expect(createRequestObject("myEntity", PATCH, {}, undefined)).toEqual({
             fullEndpoint: "myEntity",
             requestBody: {}
         })
-        expect(createRequest("myEntity", PATCH, {foo: "Foo", bar: "Bar"}, undefined)).toEqual({
+        expect(createRequestObject("myEntity", PATCH, {foo: "Foo", bar: "Bar"}, undefined)).toEqual({
             fullEndpoint: "myEntity",
             requestBody: {foo: "Foo", bar: "Bar"}
         })
-        expect(createRequest("myEntity", PATCH, {}, 1)).toEqual({
+        expect(createRequestObject("myEntity", PATCH, {}, 1)).toEqual({
             fullEndpoint: "myEntity/1",
             requestBody: {}
         })
-        expect(createRequest("myEntity", PATCH, {foo: "Foo", bar: "Bar"}, 1)).toEqual({
+        expect(createRequestObject("myEntity", PATCH, {foo: "Foo", bar: "Bar"}, 1)).toEqual({
             fullEndpoint: "myEntity/1",
             requestBody: {foo: "Foo", bar: "Bar"}
         })
@@ -97,8 +91,9 @@ describe('createApiFunctions', () => {
     const apiFunctions = createApiFunctions(domainConfigs)
 
     a.forEach((a) => {
-        it(`should create api function for ${a}, for each entity using configuration object`, () => {
+        it(`should create a bound function to callApi, for each entity using configuration object, for ${a}`, () => {
             expect(apiFunctions.myEntity1[a].name).toEqual("bound callApi")
+            expect(apiFunctions.myEntity2[a].name).toEqual("bound callApi")
         })
     })
 })

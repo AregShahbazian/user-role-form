@@ -6,7 +6,6 @@ import {merge, reduce, union} from "lodash";
 import {combineActions, handleActions} from "redux-actions";
 import routines from "../actions/index";
 
-// NOTE: lodash merge performs recursively, and could slow down performance
 /**
  * Performs immutable merge of a single normalized entity with the state
  * @param state
@@ -49,11 +48,11 @@ export const setErrorState = (state, payload) => {
 };
 
 export const setLoadingState = (state, loading) => {
-    return {...state, loading: loading}
+    return update(state, {loading: {$set: loading}})
 };
 
 /**
- * Reducers for entity-state
+ * Reducers for entity-states
  * @param entityRoutines
  * @param initialState
  */
@@ -104,6 +103,9 @@ const createEntityDataReducers = (entityRoutines, initialState) => handleActions
     }
 }, initialState);
 
+/**
+ * Reducers for userPicker redux-form state, used as plugin for formReducer
+ * */
 const createUserPickerFormReducers = handleActions({
     [combineActions(
         routines.PROJECT_USER_ROLES.CREATE.trigger,

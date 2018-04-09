@@ -1,9 +1,12 @@
-import {deleteEntityFromState, mergeEntityIntoState, replaceStateWithEntities} from "./index";
+import {
+    deleteEntityFromState, mergeEntityIntoState, replaceStateWithEntities, setErrorState,
+    setLoadingState
+} from "./index";
 
-const object1 = {id: 1, foo: "Foo1", bar: "Bar1"}
-const object2 = {id: 2, foo: "Foo2", bar: "Bar2"}
-const object2Changed = {id: 2, foo: "Foo2 CHANGED", bar: "Bar2 CHANGED"}
-const object3 = {id: 3, foo: "Foo3", bar: "Bar3"}
+const object1 = {id: 1, foo: "Foo1", bar: "Bar1"};
+const object2 = {id: 2, foo: "Foo2", bar: "Bar2"};
+const object2Changed = {id: 2, foo: "Foo2 CHANGED", bar: "Bar2 CHANGED"};
+const object3 = {id: 3, foo: "Foo3", bar: "Bar3"};
 
 const myEntityState12 = {
     entities: {
@@ -13,7 +16,7 @@ const myEntityState12 = {
         }
     },
     result: [1, 2]
-}
+};
 
 const myEntity2 = {
     entities: {
@@ -22,7 +25,7 @@ const myEntity2 = {
         }
     },
     result: 2
-}
+};
 
 const myEntity2Changed = {
     entities: {
@@ -31,7 +34,7 @@ const myEntity2Changed = {
         }
     },
     result: 2
-}
+};
 
 const myEntity3 = {
     entities: {
@@ -40,7 +43,7 @@ const myEntity3 = {
         }
     },
     result: 3
-}
+};
 
 
 describe('mergeEntityIntoState', () => {
@@ -79,7 +82,7 @@ describe('mergeEntityIntoState', () => {
         expect(updated.entities).not.toBe(myEntityState12.entities.myEntities)
     })
 
-})
+});
 
 
 describe('deleteEntityFromState', () => {
@@ -96,7 +99,7 @@ describe('deleteEntityFromState', () => {
         expect(notDeleted).toEqual(myEntityState12)
     })
 
-})
+});
 
 
 describe('replaceStateWithEntities', () => {
@@ -126,5 +129,46 @@ describe('replaceStateWithEntities', () => {
         expect(replaced.result).not.toBe(myEntityState12.result)
     })
 
-})
+});
+
+
+describe('setErrorState', () => {
+    const ERROR_OBJ = {message: "Some error"};
+    const state = {
+        foo: "bar",
+        error: {}
+    };
+    let errorState = setErrorState(state, ERROR_OBJ)
+
+
+    it("should set error object in state immutably", () => {
+        expect(errorState).toEqual({
+            ...state,
+            error: ERROR_OBJ
+        });
+
+        expect(errorState.error).not.toBe(state.error)
+    })
+
+});
+
+
+describe('setLoadingState', () => {
+    const state = {
+        foo: "bar",
+        loading: false
+    };
+    let loadingState = setLoadingState(state, true)
+
+
+    it("should set loading in state immutably", () => {
+        expect(loadingState).toEqual({
+            ...state,
+            loading: true
+        });
+
+        expect(loadingState.loading).not.toBe(state.loading)
+    })
+
+});
 

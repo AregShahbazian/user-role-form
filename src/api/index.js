@@ -1,14 +1,14 @@
-import config from "../config/index"
+import config from "../config/index";
 import {normalize, schema} from "normalizr";
 import axios from "axios";
 import {reduce} from "lodash";
 import $ from "jquery";
-import "./mock"
+import "./mock";
 
-export const GET = 'get'
-export const POST = 'post'
-export const PATCH = 'patch'
-export const DELETE = 'delete'
+export const GET = 'get';
+export const POST = 'post';
+export const PATCH = 'patch';
+export const DELETE = 'delete';
 
 axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -21,28 +21,28 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
  * @param id
  * @returns {{fullEndpoint: string, requestBody: *}}
  */
-export const createRequest = (endpoint, method, payload, id) => {
-    let idUriParameter = ""
+export const createRequestObject = (endpoint, method, payload, id) => {
+    let idUriParameter = "";
 
     if (method !== POST && id) {
-        idUriParameter = `/${id}`
+        idUriParameter = `/${id}`;
     }
 
     let queryParameters = "";
-    let requestBody
+    let requestBody;
 
     if (method === GET || method === DELETE) {
-        queryParameters += !$.isEmptyObject(payload) ? "?" + $.param(payload) : ""
-        requestBody = undefined
+        queryParameters += !$.isEmptyObject(payload) ? "?" + $.param(payload) : "";
+        requestBody = undefined;
     } else {
-        requestBody = payload
+        requestBody = payload;
     }
 
-    return {fullEndpoint: endpoint + idUriParameter + queryParameters, requestBody: requestBody}
+    return {fullEndpoint: endpoint + idUriParameter + queryParameters, requestBody: requestBody};
 }
 
 /**
- * Perform the actual request
+ * Perform the actual request and either return normalized data, or error object
  * @param method
  * @param request
  * @param schema
@@ -59,8 +59,7 @@ const makeRequest = (method, request, schema) =>
     ))
 
 /**
- * Generic function for calling an api at given endpoint, with given method, using given payload as data (or adding the
- * id in the meta object to the endpoint). Returns the data normalized using the given schema
+ * Convenience function for creating request object and making the request
  * @param endpoint
  * @param schema
  * @param method
@@ -69,20 +68,26 @@ const makeRequest = (method, request, schema) =>
  * @returns {Promise.<T>|*}
  */
 const callApi = (endpoint = '', schema, method = GET, payload = {}, meta = {}) => {
-    let request = createRequest(endpoint, method, payload, meta.id)
+    let request = createRequestObject(endpoint, method, payload, meta.id)
     console.log(`api\t Calling api at ${request.fullEndpoint} with method ${method} and payload ${JSON.stringify(request.requestBody)}`)
     return makeRequest(method, request, schema)
 }
 
-export const createApiFunctions = (config) => reduce(config, (acc, val, key) => {
-    acc[key] = {
-        fetchById: callApi.bind(null, val.endpoint, val.schema, GET),
-        fetch: callApi.bind(null, val.endpoint, new schema.Array(val.schema), GET),
-        create: callApi.bind(null, val.endpoint, val.schema, POST),
-        update: callApi.bind(null, val.endpoint, val.schema, PATCH),
-        delete: callApi.bind(null, val.endpoint, val.schema, DELETE)
+/**
+ * For each config object in the config parameter, an object with api-functions is created,
+ * containing api-functions for all routines
+ * @param config
+ * @returns {{}|any|any}
+ */
+export const createApiFunctions = (config) => reduce(config, (apiFunctions, entityConfig, entityName) => {
+    apiFunctions[entityName] = {
+        fetchById: callApi.bind(null, entityConfig.endpoint, entityConfig.schema, GET),
+        fetch: callApi.bind(null, entityConfig.endpoint, new schema.Array(entityConfig.schema), GET),
+        create: callApi.bind(null, entityConfig.endpoint, entityConfig.schema, POST),
+        update: callApi.bind(null, entityConfig.endpoint, entityConfig.schema, PATCH),
+        delete: callApi.bind(null, entityConfig.endpoint, entityConfig.schema, DELETE)
     }
-    return acc
+    return apiFunctions
 }, {})
 
 /**
@@ -90,6 +95,4 @@ export const createApiFunctions = (config) => reduce(config, (acc, val, key) => 
  * containing api-functions for all routines
  */
 export default createApiFunctions(config)
-
-
 

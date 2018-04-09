@@ -83,8 +83,9 @@ describe('createWatcherSagas', () => {
     const watcherSagas = createWatcherSagas(mockDomainConfigs, myEntityRoutines, apiFunctions)
 
     a.forEach((a) => {
-        it(`should create watcher for ${a}.TRIGGER, for each entity using configuration object`, () => {
+        it(`should create watcher for ${a}.TRIGGER, for each entity, using configuration object`, () => {
             expect(watcherSagas.myEntity1[a].name).toEqual("bound watchAction")
+            expect(watcherSagas.myEntity2[a].name).toEqual("bound watchAction")
         })
     })
 })
