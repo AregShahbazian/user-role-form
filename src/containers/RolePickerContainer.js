@@ -8,8 +8,6 @@ const mapStateToProps = (state) => ({
     roles: getAllEntities(state, "roles")
 });
 
-const mapDispatchToProps = ({});
-
 class RolePickerContainer extends React.Component {
 
     render() {
@@ -25,6 +23,5 @@ RolePickerContainer.propTypes = {
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(RolePickerContainer)

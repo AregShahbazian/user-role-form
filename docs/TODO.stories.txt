@@ -1,18 +1,5 @@
 
-
-style-components
-
-
 create e2e tests
-
-clean up unused map**toprops functions
-
-check unit test coverage and quality
-
-check documentation
-
-check unused routines/api functions
-
 
 
 
@@ -59,3 +46,14 @@ Handle network errors
     like 404
     for projectUserRoles Create, Update and Delete ops
 
+
+style-components
+
+clean up unused map**toprops functions
+
+check unit test quality
+
+check documentation
+
+check unused routines/api functions
+    leave as is

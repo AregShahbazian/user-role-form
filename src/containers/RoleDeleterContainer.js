@@ -4,9 +4,6 @@ import PropTypes from "prop-types";
 import routines from "../actions/index"
 import UserRoleDeleter from "../components/RoleDeleter";
 
-const mapStateToProps = (state) => ({
-});
-
 const mapDispatchToProps = ({
     deleteProjectUserRole: routines.PROJECT_USER_ROLES.DELETE.trigger
 });
@@ -28,6 +25,6 @@ RoleDeleterContainer.propTypes = {
 };
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(RoleDeleterContainer)

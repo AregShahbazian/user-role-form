@@ -37,7 +37,7 @@ const renderDropdownList = ({input, data, loading, handleChange}) =>
                   }}/>
 
 const ProjectPicker = ({projects, loading, handleSelect}) => (
-    <ProjectPickerForm>
+    <ProjectPickerForm id="project-picker">
         <label>Choose project </label>
         <ProjectPickerField>
             <Field
