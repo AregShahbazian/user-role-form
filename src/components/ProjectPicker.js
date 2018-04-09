@@ -23,7 +23,7 @@ const renderDropdownList = ({input, data, loading, handleChange}) =>
 
 const ProjectPicker = ({projects, loading, handleSelect}) => (
     <DropDownListForm>
-        <label>Project </label>
+        <label>Choose project </label>
         <DropDownListField>
             <Field
                 name="project"

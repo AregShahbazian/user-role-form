@@ -5,8 +5,10 @@ export const RolePickerDiv = styled.div`
 `;
 
 export const RoleSpan = styled.span`
-    border: solid #bbb 2px;
-    border-left-width: ${props => props.first ? "4px" : 0};
+    --main-color: #333;
+  
+    border: solid var(--main-color) 1px;
+    border-left-style: ${props => props.first ? "solid" : "none"};
     border-top-left-radius:  ${props => props.first ? "8px" : 0};
     border-bottom-left-radius:  ${props => props.first ? "8px" : 0};
     border-top-right-radius:  ${props => props.last ? "8px" : 0};
@@ -14,5 +16,11 @@ export const RoleSpan = styled.span`
     
     padding: 0.2em 0.2em;
     
-    background-color:  ${props => props.selected && "#bbb"};
+    background-color:  ${props => props.selected && "var(--main-color)"};
+    color:  ${props => props.selected ? "#fff" : "var(--main-color)"};
+    
+    &:hover{
+        background-color: #eee;
+        cursor: pointer;    
+    }
 `;

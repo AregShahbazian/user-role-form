@@ -2,13 +2,14 @@ import React from 'react';
 import ProjectPickerContainer from "../containers/ProjectPickerContainer";
 import UserRoleTableContainer from "../containers/UserRoleTableContainer";
 import UserRoleCreatorContainer from "../containers/UserRoleCreatorContainer";
+import {AppDiv} from "./App.styled";
 
 const App = () => (
-    <div>
+    <AppDiv>
         <ProjectPickerContainer/>
         <UserRoleTableContainer/>
         <UserRoleCreatorContainer/>
-    </div>
+    </AppDiv>
 );
 
 export default App
