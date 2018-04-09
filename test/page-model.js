@@ -48,7 +48,7 @@ class RolePicker {
     }
 
     getRolePickerOption(text) {
-        return new RolePickerOption(this.body, text)
+        return new RolePickerOption(this.body, false, text)
     }
 }
 
@@ -65,9 +65,16 @@ class RoleDeleter {
     }
 }
 
+class User {
+    constructor(parent) {
+        this.body = parent.find(".user");
+    }
+}
+
 class UserRoleRow {
-    constructor(id) {
-        this.body = Selector(".user-role-row#row-" + id);
+    constructor(parent, id) {
+        this.body = parent.find(".user-role-row#row-" + id);
+        this.user = new User(this.body);
         this.rolePicker = new RolePicker(this.body);
         this.roleDeleter = new RoleDeleter(this.body);
     }
@@ -89,12 +96,23 @@ class UserRoleTable {
     constructor() {
         this.body = Selector(".user-role-table-div");
     }
+
+    getUserRoleRow(id) {
+        return new UserRoleRow(this.body, id)
+    }
+}
+
+class UserPicker {
+    constructor(parent) {
+        this.body = parent.find(".user-picker");
+        this.dropDownList = new DropDowList(this.body);
+    }
 }
 
 class UserRoleCreator {
     constructor() {
         this.body = Selector(".user-role-creator");
-        this.dropDownList = new DropDowList(this.body);
+        this.userPicker = new UserPicker(this.body);
         this.rolePicker = new RolePicker(this.body);
     }
 }
@@ -104,5 +122,7 @@ export default class Page {
         this.projectPicker = new ProjectPicker();
         this.userRoleTable = new UserRoleTable();
         this.userRoleCreator = new UserRoleCreator();
+        this.noUserP = new NoUserP();
+        this.errorP = new ErrorP();
     }
 }
