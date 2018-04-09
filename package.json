@@ -34,6 +34,7 @@
     "testcafe:firefox:headless": "testcafe -c 2 firefox:headless test/App.testcafe.js",
     "testcafe:chrome": "testcafe chrome test/App.testcafe.js --speed 0.9",
     "testcafe:chrome:headless": "testcafe -c 2 chrome:headless test/App.testcafe.js",
-    "testcafe:all": "testcafe -c 2 firefox:headless,chrome:headless test/App.testcafe.js"
+    "testcafe:all": "testcafe -c 2 firefox:headless,chrome:headless test/App.testcafe.js",
+    "testcafe:remote": "testcafe remote test/App.testcafe.js"
   }
 }

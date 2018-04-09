@@ -1,7 +1,7 @@
 
 create e2e tests
 
-
+scale on mobile
 
 *** HISTORY ***
 

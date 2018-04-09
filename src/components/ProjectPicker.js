@@ -14,8 +14,14 @@ const ProjectPickerForm = styled.form`
 `;
 
 const ProjectPickerField = styled.div`
-    flex: 2 0 auto;
+    min-width: 150px;
+    max-width: 20em;
+    flex-grow: 1;
     margin-left: 1em;
+`;
+
+const ProjectPickerLabel = styled.label`
+    white-space: nowrap;
 `;
 
 
@@ -38,7 +44,7 @@ const renderDropdownList = ({input, data, loading, handleChange}) =>
 
 const ProjectPicker = ({projects, loading, handleSelect}) => (
     <ProjectPickerForm className="project-picker">
-        <label>Choose project </label>
+        <ProjectPickerLabel>Choose project </ProjectPickerLabel>
         <ProjectPickerField>
             <Field
                 name="project"
