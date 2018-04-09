@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import {RolePickerDiv, RoleSpan} from "./RolePicker.styled";
+import {RolePickerDiv, RoleSpan} from "./styled/RolePicker.styled";
 
 const RolePicker = ({selectedRole, roles, handleRolePick, visible}) => {
     return <RolePickerDiv visible={visible}>

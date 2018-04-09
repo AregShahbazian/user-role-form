@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import {DeleteSpan} from "./RoleDeleter.styled";
+import {DeleteSpan} from "./styled/RoleDeleter.styled";
 
 const RoleDeleter = ({handleDeleteClick}) => (
     <DeleteSpan onClick={handleDeleteClick}>

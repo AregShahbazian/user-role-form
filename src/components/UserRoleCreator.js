@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import UserPickerContainer from "../containers/UserPickerContainer";
 import RolePickerContainer from "../containers/RolePickerContainer";
-import {UserRoleCreatorDiv} from "./UserRoleCreator.styled";
+import {UserRoleCreatorDiv} from "./styled/UserRoleCreator.styled";
 
 
 const UserRoleCreator = ({visible, selectedUserId, addRole}) => (

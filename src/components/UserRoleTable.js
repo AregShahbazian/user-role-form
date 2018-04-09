@@ -1,15 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import styled from 'styled-components';
 import UserRoleRowContainer from "../containers/UserRoleRowContainer";
-
-const Table = styled.table`
-    position: relative;
-    table-layout: auto;
-    width: 100%;
-    
-    opacity:  ${props => !props.loading ? "1.0" : "0.3"};
-`;
+import {Table} from "./styled/UserRoleTable.styled";
 
 const UserRoleTable = ({show, projectUserRoles, loading, error}) => (
     show && <div>

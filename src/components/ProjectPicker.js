@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {DropdownList} from 'react-widgets';
 import {Field} from "redux-form";
-import {DropDownListField, DropDownListForm} from "./ProjectPicker.styled";
+import {DropDownListField, DropDownListForm} from "./styled/ProjectPicker.styled";
 
 const renderDropdownList = ({input, data, loading, handleChange}) =>
     <DropdownList {...input}
