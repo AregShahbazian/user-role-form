@@ -7,7 +7,7 @@ import {normalize, schema} from "normalizr";
 import {testSaga} from "redux-saga-test-plan";
 
 describe('saga crudSaga', () => {
-    const routines = createRoutinesPerEntity(["MY_ENTITY"])
+    const routines = createRoutinesPerEntity(["MY_ENTITY"]);
     const apiFn = jest.fn();
 
     const PAYLOAD = "PAYLOAD";
@@ -35,12 +35,10 @@ describe('saga crudSaga', () => {
             .next()
             .isDone()
     })
-
-
-})
+});
 
 describe('saga watchLatestAction', () => {
-    const MY_ENTITY_ACTION = 'MY_ENTITY_ACTION'
+    const MY_ENTITY_ACTION = 'MY_ENTITY_ACTION';
 
     it('should watch given action and start given saga', () => {
         testSaga(watchLatestAction, MY_ENTITY_ACTION, crudSaga)
@@ -49,35 +47,35 @@ describe('saga watchLatestAction', () => {
             .next()
             .isDone()
     })
-})
+});
 
 describe('createWatcherSagasPerEntity', () => {
     const myEntity1 = "myEntity1";
-    const myEntity1Schema = new schema.Entity(myEntity1)
-    const myEntity1InitialState = normalize([], new schema.Array(myEntity1Schema))
+    const myEntity1Schema = new schema.Entity(myEntity1);
+    const myEntity1InitialState = normalize([], new schema.Array(myEntity1Schema));
 
     const myEntity1Config = {
         routineString: "MY_ENTITY1",
         schema: myEntity1Schema,
         initialState: myEntity1InitialState
-    }
+    };
 
     const myEntity2 = "myEntity2";
-    const myEntity2Schema = new schema.Entity(myEntity2)
-    const myEntity2InitialState = normalize([], new schema.Array(myEntity2Schema))
+    const myEntity2Schema = new schema.Entity(myEntity2);
+    const myEntity2InitialState = normalize([], new schema.Array(myEntity2Schema));
 
     const myEntity2Config = {
         routineString: "MY_ENTITY2",
         schema: myEntity2Schema,
         initialState: myEntity2InitialState
-    }
+    };
 
-    const mockDomainConfigs = {myEntity1: myEntity1Config, myEntity2: myEntity2Config}
+    const mockDomainConfigs = {myEntity1: myEntity1Config, myEntity2: myEntity2Config};
 
     const a = ["fetch", "create", "update", "delete"]
-    const myEntityRoutines = createRoutinesPerEntity([myEntity1Config.routineString, myEntity2Config.routineString])
-    const apiFunctions = createApiFunctionsPerEntity(mockDomainConfigs)
-    const watcherSagas = createWatcherSagasPerEntity(mockDomainConfigs, myEntityRoutines, apiFunctions)
+    const myEntityRoutines = createRoutinesPerEntity([myEntity1Config.routineString, myEntity2Config.routineString]);
+    const apiFunctions = createApiFunctionsPerEntity(mockDomainConfigs);
+    const watcherSagas = createWatcherSagasPerEntity(mockDomainConfigs, myEntityRoutines, apiFunctions);
 
     a.forEach((a) => {
         it(`should create watcher for ${a}.TRIGGER, for each entity, using configuration object`, () => {
@@ -85,7 +83,7 @@ describe('createWatcherSagasPerEntity', () => {
             expect(watcherSagas.myEntity2[a].name).toEqual("bound watchLatestAction")
         })
     })
-})
+});
 
 describe('createWatcherSagaForks', () => {
 
@@ -97,9 +95,9 @@ describe('createWatcherSagaForks', () => {
     const mockWatcherSagas = {
         myEntity1: {foo: WATCHER_FOO_1, bar: WATCHER_BAR_1},
         myEntity2: {foo: WATCHER_FOO_2, bar: WATCHER_BAR_2}
-    }
+    };
 
-    const watcherSagaForks = createWatcherSagaForks(mockWatcherSagas)
+    const watcherSagaForks = createWatcherSagaForks(mockWatcherSagas);
 
     it("should create a fork for each leaf in the provided object", () => {
         expect(watcherSagaForks).toEqual(
@@ -107,5 +105,5 @@ describe('createWatcherSagaForks', () => {
         )
     })
 
-})
+});3
 
