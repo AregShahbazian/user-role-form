@@ -21,10 +21,9 @@ To start the app, run:
 - `npm run test`
 
 #### E2E tests
-Testcafe is used for end-to-end tests. 
+[Testcafe](http://devexpress.github.io/testcafe/) 
+is used for end-to-end tests. The command below will run the tests in Firefox and Chrome in headless mode.
 - `npm run testcafe:all`
-
-
 
 ### Features
 
