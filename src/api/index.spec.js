@@ -68,7 +68,6 @@ describe('createApiFunctionsPerEntity', () => {
     const myEntity1InitialState = normalize([], new schema.Array(myEntity1Schema))
 
     const myEntity1Config = {
-        endpoint: "myEntity1",
         routineString: "MY_ENTITY1",
         schema: myEntity1Schema,
         initialState: myEntity1InitialState
@@ -79,7 +78,6 @@ describe('createApiFunctionsPerEntity', () => {
     const myEntity2InitialState = normalize([], new schema.Array(myEntity2Schema))
 
     const myEntity2Config = {
-        endpoint: "myEntity2",
         routineString: "MY_ENTITY2",
         schema: myEntity2Schema,
         initialState: myEntity2InitialState

@@ -34,36 +34,30 @@ const projectUserRolesInitialState = {
     error: undefined
 };
 
-
 const entityConfigs = {}
 
 entityConfigs[projects] = {
-    endpoint: "projects",
     routineString: "PROJECTS",
     schema: projectsSchema,
     initialState: projectsInitialState
 };
 
 entityConfigs[users] = {
-    endpoint: "users",
     routineString: "USERS",
     schema: usersSchema,
     initialState: usersInitialState
 };
 
 entityConfigs[roles] = {
-    endpoint: "roles",
     routineString: "ROLES",
     schema: rolesSchema,
     initialState: rolesInitialState
 };
 
 entityConfigs[projectUserRoles] = {
-    endpoint: "projectUserRoles",
     routineString: "PROJECT_USER_ROLES",
     schema: projectUserRolesSchema,
     initialState: projectUserRolesInitialState
 };
-
 
 export default entityConfigs

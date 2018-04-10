@@ -81,11 +81,11 @@ const callApi = (endpoint = '', schema, method = GET, payload = {}, meta = {}) =
  */
 export const createApiFunctionsPerEntity = (config) => reduce(config, (apiFunctions, entityConfig, entityName) => {
     apiFunctions[entityName] = {
-        fetchById: callApi.bind(null, entityConfig.endpoint, entityConfig.schema, GET),
-        fetch: callApi.bind(null, entityConfig.endpoint, new schema.Array(entityConfig.schema), GET),
-        create: callApi.bind(null, entityConfig.endpoint, entityConfig.schema, POST),
-        update: callApi.bind(null, entityConfig.endpoint, entityConfig.schema, PATCH),
-        delete: callApi.bind(null, entityConfig.endpoint, entityConfig.schema, DELETE)
+        fetchById: callApi.bind(null, entityName, entityConfig.schema, GET),
+        fetch: callApi.bind(null, entityName, new schema.Array(entityConfig.schema), GET),
+        create: callApi.bind(null, entityName, entityConfig.schema, POST),
+        update: callApi.bind(null, entityName, entityConfig.schema, PATCH),
+        delete: callApi.bind(null, entityName, entityConfig.schema, DELETE)
     }
     return apiFunctions
 }, {})
