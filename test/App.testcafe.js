@@ -7,7 +7,7 @@ fixture `User Role Form`
         maximize()
     });
 
-const page = new Page()
+const page = new Page();
 
 const PROJECT_ID_1 = "1";
 const PROJECT_ID_2 = "2";

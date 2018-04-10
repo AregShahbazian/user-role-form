@@ -34,7 +34,7 @@ const projectUserRolesInitialState = {
     error: undefined
 };
 
-const domainConfigs = {}
+const domainConfigs = {};
 
 domainConfigs[projects] = {
     routineString: "PROJECTS",

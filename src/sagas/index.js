@@ -18,11 +18,11 @@ export function* crudSaga(routine, apiFunction, action) {
         yield put(routine.success(response))
     }
     else {
-        console.log("saga\t put : entity operation failure")
+        console.log("saga\t put : entity operation failure");
         console.error(error);
         yield put(routine.failure(error))
     }
-    console.log("saga\t put : entity operation fulfill")
+    console.log("saga\t put : entity operation fulfill");
     yield put(routine.fulfill())
 }
 
