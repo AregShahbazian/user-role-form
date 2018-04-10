@@ -1,7 +1,7 @@
 import {crudOps, routinesPerEntity} from "./index";
 
 describe('myEntity action creators', () => {
-    const routines = routinesPerEntity(["MY_ENTITY"])
+    const routines = routinesPerEntity(["MY_ENTITY"]);
     const PAYLOAD = "PAYLOAD";
     const META = {id: 123};
 
@@ -11,25 +11,25 @@ describe('myEntity action creators', () => {
                 type: `MY_ENTITY/${op}/TRIGGER`,
                 payload: PAYLOAD,
                 meta: {id: 123}
-            })
+            });
             expect(routines.MY_ENTITY[op].request(PAYLOAD, META)).toEqual({
                 type: `MY_ENTITY/${op}/REQUEST`,
                 payload: PAYLOAD,
                 meta: {id: 123}
 
-            })
+            });
             expect(routines.MY_ENTITY[op].success(PAYLOAD, META)).toEqual({
                 type: `MY_ENTITY/${op}/SUCCESS`,
                 payload: PAYLOAD,
                 meta: {id: 123}
 
-            })
+            });
             expect(routines.MY_ENTITY[op].failure(PAYLOAD, META)).toEqual({
                 type: `MY_ENTITY/${op}/FAILURE`,
                 payload: PAYLOAD,
                 meta: {id: 123}
 
-            })
+            });
             expect(routines.MY_ENTITY[op].fulfill(PAYLOAD, META)).toEqual({
                 type: `MY_ENTITY/${op}/FULFILL`,
                 payload: PAYLOAD,
@@ -38,5 +38,5 @@ describe('myEntity action creators', () => {
             })
         })
     ))
-})
+});
 

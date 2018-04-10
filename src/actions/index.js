@@ -15,12 +15,12 @@ export const routinesPerEntity = (entityRoutineStrings) => {
                 `${routineString}/${crudOp}`,
                 (payload) => payload,
                 (payload, meta) => meta
-            )
+            );
             return entityRoutines
-        }, {})
+        }, {});
         return domainRoutines
     }, {})
 
-}
+};
 
 export default routinesPerEntity(Object.values(config).map(e => e.routineString))
