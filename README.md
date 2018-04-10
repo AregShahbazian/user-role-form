@@ -1,4 +1,4 @@
-Products Grid
+User Role Form
 ====
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
@@ -8,8 +8,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - `npm install`
 
 ### Running the app
-
-To use Hot Module Reloading without ejecting from `create-react-app`, the app is rewired using [this](https://daveceddia.com/hot-reloading-create-react-app/) guide.
 
 To start the app, run:
 
