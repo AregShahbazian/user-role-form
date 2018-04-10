@@ -55,9 +55,6 @@ export function* watchAction(action, doSaga) {
 export const createWatcherSagas = (domainConfigs, routines, apiFunctions) => {
     return reduce(domainConfigs, (watchers, entityConfig, entityName) => {
         watchers[entityName] = {
-            fetchById: watchAction.bind(null, routines[entityConfig.routineString].FETCH_BY_ID.TRIGGER,
-                makeApiCall.bind(null, routines[entityConfig.routineString].FETCH_BY_ID, apiFunctions[entityName].fetchById)),
-
             fetch: watchAction.bind(null, routines[entityConfig.routineString].FETCH.TRIGGER,
                 makeApiCall.bind(null, routines[entityConfig.routineString].FETCH, apiFunctions[entityName].fetch)),
 

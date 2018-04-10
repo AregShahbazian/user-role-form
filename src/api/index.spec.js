@@ -85,7 +85,7 @@ describe('createApiFunctionsPerEntity', () => {
 
     const domainConfigs = {myEntity1: myEntity1Config, myEntity2: myEntity2Config}
 
-    const a = ["fetchById", "fetch", "create", "update"]
+    const a = ["fetch", "create", "update", "delete"]
     const apiFunctions = createApiFunctionsPerEntity(domainConfigs)
 
     a.forEach((a) => {

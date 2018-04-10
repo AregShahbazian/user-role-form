@@ -1,13 +1,12 @@
 import config from "../config/index";
 import {createRoutine} from "redux-saga-routines";
 
-const FETCH_BY_ID = 'FETCH_BY_ID';
 const FETCH = 'FETCH';
 const CREATE = 'CREATE';
 const UPDATE = 'UPDATE';
 const DELETE = 'DELETE';
 
-export const crudOps = [FETCH_BY_ID, FETCH, CREATE, UPDATE, DELETE];
+export const crudOps = [FETCH, CREATE, UPDATE, DELETE];
 
 export const routinesPerEntity = (entityRoutineStrings) => {
     return entityRoutineStrings.reduce((domainRoutines, routineString) => {

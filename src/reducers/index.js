@@ -73,7 +73,6 @@ const createEntityDataReducers = (entityRoutines, initialState) => handleActions
         return replaceStateWithEntities(state, action.payload);
     },
     [combineActions(
-        entityRoutines.FETCH_BY_ID.success,
         entityRoutines.CREATE.success,
         entityRoutines.UPDATE.success)]
         (state, action) {
@@ -84,7 +83,6 @@ const createEntityDataReducers = (entityRoutines, initialState) => handleActions
         return deleteEntityFromState(state, action.payload);
     },
     [combineActions(
-        entityRoutines.FETCH_BY_ID.failure,
         entityRoutines.FETCH.failure,
         entityRoutines.CREATE.failure,
         entityRoutines.UPDATE.failure,
@@ -93,7 +91,6 @@ const createEntityDataReducers = (entityRoutines, initialState) => handleActions
         return setLoadingState(setErrorState(state, action.payload), false);
     },
     [combineActions(
-        entityRoutines.FETCH_BY_ID.success,
         entityRoutines.FETCH.success,
         entityRoutines.CREATE.success,
         entityRoutines.UPDATE.success,
