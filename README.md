@@ -44,8 +44,14 @@ To ensure state-immutability, the `immutability-helper` library is used by the r
 
 For styling and user interface, the `react-widgets` and `styled-components` libraries are used. 
 
+### Troubleshooting
 
+After cloning the repository and running `npm install`, sometimes the error message is given:
 
+- `sh: 1: react-scripts: not found`
+
+This is an [issue](https://github.com/facebook/create-react-app/issues/3256) in `create-react-app`, and can be 
+fixed by running `npm install` again.  
 
 
 
