@@ -6,41 +6,26 @@ import {merge, reduce, union} from "lodash";
 import {combineActions, handleActions} from "redux-actions";
 import routines from "../actions/index";
 
-/**
- * Performs immutable merge of a single normalized entity with the state
- * @param state
- * @param payload
- * @returns {*}
- */
 export const mergeEntityIntoState = (state, payload) => {
     let entities = merge({}, state.entities, payload.entities)
     let result = union(state.result, [payload.result])
 
     return {...state, entities, result}
-}
+};
 
-/**
- * Performs immutable delete, removing the the id in the payload from the result array in the state
- * @param state
- * @param payload
- * @returns {*}
- */
-export const deleteEntityFromState = (state, payload) => {
+export const deleteEntityFromStateResult = (state, payload) => {
     let idx = state.result.indexOf(payload.result)
     if (idx > -1) {
         return update(state, {result: {$splice: [[idx, 1]]}})
     }
     return state
-}
+};
 
-/**
- * Immutably replaces the entities- and result-keys in the state with those in the payload
- * @param state
- * @param payload
- * @returns {{entities, result}}
- */
-export const replaceStateWithEntities = (state, payload) => {
-    return {...state, entities: payload.entities, result: payload.result}
+export const setEntitiesAndResultState = (state, payload) => {
+    return update(state, {
+        entities: {$set: payload.entities},
+        result: {$set: payload.result}
+    });
 };
 
 export const setErrorState = (state, payload) => {
@@ -51,12 +36,7 @@ export const setLoadingState = (state, loading) => {
     return update(state, {loading: {$set: loading}})
 };
 
-/**
- * Reducers for entity-states
- * @param entityRoutines
- * @param initialState
- */
-const createEntityDataReducers = (entityRoutines, initialState) => handleActions({
+const createDataReducersForEntity = (entityRoutines, initialState) => handleActions({
     /* REQUEST */
     [combineActions(
         entityRoutines.FETCH.request,
@@ -70,7 +50,7 @@ const createEntityDataReducers = (entityRoutines, initialState) => handleActions
     [combineActions(
         entityRoutines.FETCH.success)]
         (state, action) {
-        return replaceStateWithEntities(state, action.payload);
+        return setEntitiesAndResultState(state, action.payload);
     },
     [combineActions(
         entityRoutines.CREATE.success,
@@ -80,7 +60,7 @@ const createEntityDataReducers = (entityRoutines, initialState) => handleActions
     },
     [entityRoutines.DELETE.success]
         (state, action) {
-        return deleteEntityFromState(state, action.payload);
+        return deleteEntityFromStateResult(state, action.payload);
     },
     [combineActions(
         entityRoutines.FETCH.failure,
@@ -100,9 +80,6 @@ const createEntityDataReducers = (entityRoutines, initialState) => handleActions
     }
 }, initialState);
 
-/**
- * Reducers for userPicker redux-form state, used as plugin for formReducer
- * */
 const createUserPickerFormReducers = handleActions({
     [combineActions(
         routines.PROJECT_USER_ROLES.CREATE.trigger,
@@ -112,16 +89,13 @@ const createUserPickerFormReducers = handleActions({
     }
 }, {});
 
-/**
- * Creates crud-reducers, create-form reducers, and update-form reducers, for each entity in domainConfigs.
- */
-let entityDataReducers = reduce(config, (reducers, entityConfig, entityName) => {
+let dataReducersPerEntity = reduce(config, (reducers, entityConfig, entityName) => {
     reducers[entityName] =
-        createEntityDataReducers(routines[entityConfig.routineString], entityConfig.initialState)
+        createDataReducersForEntity(routines[entityConfig.routineString], entityConfig.initialState)
     return reducers
-}, {})
+}, {});
 
 export default combineReducers({
-    ...entityDataReducers,
+    ...dataReducersPerEntity,
     form: formReducer.plugin({userPicker: createUserPickerFormReducers})
 })

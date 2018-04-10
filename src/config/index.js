@@ -34,30 +34,30 @@ const projectUserRolesInitialState = {
     error: undefined
 };
 
-const entityConfigs = {}
+const domainConfigs = {}
 
-entityConfigs[projects] = {
+domainConfigs[projects] = {
     routineString: "PROJECTS",
     schema: projectsSchema,
     initialState: projectsInitialState
 };
 
-entityConfigs[users] = {
+domainConfigs[users] = {
     routineString: "USERS",
     schema: usersSchema,
     initialState: usersInitialState
 };
 
-entityConfigs[roles] = {
+domainConfigs[roles] = {
     routineString: "ROLES",
     schema: rolesSchema,
     initialState: rolesInitialState
 };
 
-entityConfigs[projectUserRoles] = {
+domainConfigs[projectUserRoles] = {
     routineString: "PROJECT_USER_ROLES",
     schema: projectUserRolesSchema,
     initialState: projectUserRolesInitialState
 };
 
-export default entityConfigs
+export default domainConfigs

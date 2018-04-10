@@ -1,5 +1,5 @@
 import {
-    deleteEntityFromState, mergeEntityIntoState, replaceStateWithEntities, setErrorState,
+    deleteEntityFromStateResult, mergeEntityIntoState, setEntitiesAndResultState, setErrorState,
     setLoadingState
 } from "./index";
 
@@ -85,15 +85,15 @@ describe('mergeEntityIntoState', () => {
 });
 
 
-describe('deleteEntityFromState', () => {
-    let deleted = deleteEntityFromState(myEntityState12, myEntity2)
+describe('deleteEntityFromStateResult', () => {
+    let deleted = deleteEntityFromStateResult(myEntityState12, myEntity2)
 
     it("should delete existing entity from state immutably", () => {
         expect(deleted.result).toEqual([1])
         expect(deleted.result).not.toBe(myEntityState12.result)
     })
 
-    let notDeleted = deleteEntityFromState(myEntityState12, myEntity3)
+    let notDeleted = deleteEntityFromStateResult(myEntityState12, myEntity3)
 
     it("should leave state untouched for deleting non-existing entity", () => {
         expect(notDeleted).toEqual(myEntityState12)
@@ -102,8 +102,8 @@ describe('deleteEntityFromState', () => {
 });
 
 
-describe('replaceStateWithEntities', () => {
-    let replaced = replaceStateWithEntities(myEntityState12, {
+describe('setEntitiesAndResultState', () => {
+    let replaced = setEntitiesAndResultState(myEntityState12, {
         entities: {
             myEntities: {
                 "1": object1,
