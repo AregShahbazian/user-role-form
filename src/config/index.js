@@ -1,6 +1,6 @@
 import {normalize, schema} from "normalizr";
 
-const projects = "projects";
+export const projects = "projects";
 const projectsSchema = new schema.Entity(projects);
 const projectsInitialState = {
     ...normalize([], new schema.Array(projectsSchema)),
@@ -8,7 +8,7 @@ const projectsInitialState = {
     error: undefined
 };
 
-const users = "users";
+export const users = "users";
 const usersSchema = new schema.Entity(users);
 const usersInitialState = {
     ...normalize([], new schema.Array(usersSchema)),
@@ -16,7 +16,7 @@ const usersInitialState = {
     error: undefined
 };
 
-const roles = "roles";
+export const roles = "roles";
 const rolesSchema = new schema.Entity(roles);
 const rolesInitialState = {
     ...normalize([], new schema.Array(rolesSchema)),
@@ -24,7 +24,7 @@ const rolesInitialState = {
     error: undefined
 };
 
-const projectUserRoles = "projectUserRoles";
+export const projectUserRoles = "projectUserRoles";
 const projectUserRolesSchema = new schema.Entity("projectUserRoles", {
     project: projectsSchema, user: usersSchema, role: rolesSchema
 });

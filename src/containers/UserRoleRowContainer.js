@@ -21,11 +21,10 @@ class UserRoleRowContainer extends React.Component {
 
     render() {
         const {id, user, role, projectUsers, projectRoles} = this.props;
-        return <UserRoleRow
-            projectUser={projectUsers[user]}
-            selectedRole={projectRoles[role]}
-            onRolePick={this.updateRole}
-            projectUserRoleId={id}/>
+        return <UserRoleRow projectUser={projectUsers[user]}
+                            selectedRole={projectRoles[role]}
+                            onRolePick={this.updateRole}
+                            projectUserRoleId={id}/>
     }
 }
 

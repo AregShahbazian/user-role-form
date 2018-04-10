@@ -1,18 +1,21 @@
 import React from 'react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {roles} from "../config/index"
 import {getAllEntities} from "../reducers/selectors";
 import RolePicker from "../components/RolePicker";
 
 const mapStateToProps = (state) => ({
-    roles: getAllEntities(state, "roles")
+    roles: getAllEntities(state, roles)
 });
 
 class RolePickerContainer extends React.Component {
-
     render() {
         const {roles, selectedRole, handleRolePick, visible = true} = this.props;
-        return <RolePicker roles={roles} selectedRole={selectedRole} handleRolePick={handleRolePick} visible={visible}/>
+        return <RolePicker roles={roles}
+                           selectedRole={selectedRole}
+                           handleRolePick={handleRolePick}
+                           visible={visible}/>
     }
 }
 

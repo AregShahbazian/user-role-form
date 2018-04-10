@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {reduxForm} from "redux-form";
+import {projects} from "../config/index"
 import routines from "../actions/index"
 import ProjectPicker from "../components/ProjectPicker";
 import {getAllEntities} from "../reducers/selectors";
 
 const mapStateToProps = (state) => ({
-    projects: getAllEntities(state, "projects"),
+    projects: getAllEntities(state, projects),
     loading: state.projects.loading
 });
 
@@ -22,7 +23,8 @@ class ProjectPickerContainer extends React.Component {
     };
 
     render() {
-        return <ProjectPicker projects={this.props.projects} loading={this.props.loading}
+        return <ProjectPicker projects={this.props.projects}
+                              loading={this.props.loading}
                               handleSelect={this.handleSelect}/>
     }
 

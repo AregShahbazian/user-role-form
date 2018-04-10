@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from "react-redux";
+import {projectUserRoles} from "../config/index"
 import {getAllEntities, getSelectedProjectId} from "../reducers/selectors"
 import routines from "../actions/index"
 import UserRoleTable from "../components/UserRoleTable";
 
 const mapStateToProps = (state) => ({
     projectId: getSelectedProjectId(state),
-    projectUserRoles: getAllEntities(state, "projectUserRoles"),
+    projectUserRoles: getAllEntities(state, projectUserRoles),
     loading: state.projectUserRoles.loading,
     error: state.projectUserRoles.error
 });
@@ -18,8 +19,10 @@ const mapDispatchToProps = ({
 class UserRoleTableContainer extends React.Component {
     render() {
         const {projectId, projectUserRoles, loading, error} = this.props;
-        return <UserRoleTable visible={!!projectId} projectUserRoles={projectUserRoles}
-                              loading={loading} error={error}/>
+        return <UserRoleTable visible={!!projectId}
+                              projectUserRoles={projectUserRoles}
+                              loading={loading}
+                              error={error}/>
     }
 
     componentWillMount() {

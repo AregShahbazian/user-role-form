@@ -18,7 +18,8 @@ const mapDispatchToProps = ({
 class UserPickerContainer extends React.Component {
     render() {
         const {usersWithoutRole, loading} = this.props;
-        return <UserPicker users={usersWithoutRole} loading={loading}/>
+        return <UserPicker users={usersWithoutRole}
+                           loading={loading}/>
     }
 
     componentWillMount() {
