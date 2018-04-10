@@ -6,8 +6,8 @@ const DeleteSpan = styled.span`
     --main-color: #333;
 
     border: solid var(--main-color) 1px;
-    border-radius: 8px;  
-    padding: 0 0.2em;
+    border-radius: 20px;  
+    padding: 0 0.4em;
     
     &:hover{
         background-color: #eee;

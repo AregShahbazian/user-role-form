@@ -10,13 +10,14 @@ const RolePickerDiv = styled.div`
 
 const RoleSpan = styled.span`
     --main-color: #333;
+    --border-radius: 5px;
   
     border: solid var(--main-color) 1px;
     border-left-style: ${props => props.first ? "solid" : "none"};
-    border-top-left-radius:  ${props => props.first ? "8px" : 0};
-    border-bottom-left-radius:  ${props => props.first ? "8px" : 0};
-    border-top-right-radius:  ${props => props.last ? "8px" : 0};
-    border-bottom-right-radius:  ${props => props.last ? "8px" : 0};
+    border-top-left-radius:  ${props => props.first ? "var(--border-radius)" : 0};
+    border-bottom-left-radius:  ${props => props.first ? "var(--border-radius)" : 0};
+    border-top-right-radius:  ${props => props.last ? "var(--border-radius)" : 0};
+    border-bottom-right-radius:  ${props => props.last ? "var(--border-radius)" : 0};
     
     padding: 0 0.2em;
     
