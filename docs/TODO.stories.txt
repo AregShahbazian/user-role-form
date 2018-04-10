@@ -1,7 +1,4 @@
 
-check code readability
-
-
 
 *** HISTORY ***
 
@@ -64,3 +61,4 @@ scale on mobile
 
 selectors unit-tests
 
+check code readability
