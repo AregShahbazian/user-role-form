@@ -5,7 +5,7 @@ export const getAllEntities = (state, entityName) => {
 };
 
 export const getEntitiesWithIds = (state, entityName, ids) => {
-    let cachedEntities = []
+    let cachedEntities = [];
     forEach(ids, (id) => {
         cachedEntities = concat(cachedEntities, state[entityName].entities[entityName][id])
     });
@@ -26,6 +26,6 @@ export const getUsersWithoutRole = (state) => {
         userIdsWithRole = concat(userIdsWithRole, projectUserRole.user)
     });
 
-    let userIdsWithoutRole = allUsersIds.filter(id => !userIdsWithRole.includes(id))
+    let userIdsWithoutRole = allUsersIds.filter(id => !userIdsWithRole.includes(id));
     return getEntitiesWithIds(state, "users", userIdsWithoutRole)
-}
+};

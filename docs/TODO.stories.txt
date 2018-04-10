@@ -1,7 +1,7 @@
 
 check code readability
 
-selectors unit-tests
+
 
 *** HISTORY ***
 
@@ -61,4 +61,6 @@ check unused routines/api functions
 create e2e tests
 
 scale on mobile
+
+selectors unit-tests
 
