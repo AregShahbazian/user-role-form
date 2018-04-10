@@ -1,13 +1,13 @@
 import "../config/index";
 import {createWatcherSagaForks, createWatcherSagas, makeApiCall, watchAction} from "./index";
-import {entityRoutines} from "../actions";
+import {routinesPerEntity} from "../actions";
 import {fork} from "redux-saga/effects";
-import {createApiFunctions} from "../api";
+import {createApiFunctionsPerEntity} from "../api";
 import {normalize, schema} from "normalizr";
 import {testSaga} from "redux-saga-test-plan";
 
 describe('saga makeApiCall', () => {
-    const routines = entityRoutines(["MY_ENTITY"])
+    const routines = routinesPerEntity(["MY_ENTITY"])
     const apiFn = jest.fn();
 
     const PAYLOAD = "PAYLOAD";
@@ -59,7 +59,7 @@ describe('createWatcherSagas', () => {
 
     const myEntity1Config = {
         endpoint: "myEntity1",
-        routineName: "MY_ENTITY1",
+        routineString: "MY_ENTITY1",
         schema: myEntity1Schema,
         initialState: myEntity1InitialState
     }
@@ -70,7 +70,7 @@ describe('createWatcherSagas', () => {
 
     const myEntity2Config = {
         endpoint: "myEntity2",
-        routineName: "MY_ENTITY2",
+        routineString: "MY_ENTITY2",
         schema: myEntity2Schema,
         initialState: myEntity2InitialState
     }
@@ -78,8 +78,8 @@ describe('createWatcherSagas', () => {
     const mockDomainConfigs = {myEntity1: myEntity1Config, myEntity2: myEntity2Config}
 
     const a = ["fetchById", "fetch", "create", "update"]
-    const myEntityRoutines = entityRoutines([myEntity1Config.routineName, myEntity2Config.routineName])
-    const apiFunctions = createApiFunctions(mockDomainConfigs)
+    const myEntityRoutines = routinesPerEntity([myEntity1Config.routineString, myEntity2Config.routineString])
+    const apiFunctions = createApiFunctionsPerEntity(mockDomainConfigs)
     const watcherSagas = createWatcherSagas(mockDomainConfigs, myEntityRoutines, apiFunctions)
 
     a.forEach((a) => {

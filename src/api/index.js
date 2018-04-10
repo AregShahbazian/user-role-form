@@ -79,7 +79,7 @@ const callApi = (endpoint = '', schema, method = GET, payload = {}, meta = {}) =
  * @param config
  * @returns {{}|any|any}
  */
-export const createApiFunctions = (config) => reduce(config, (apiFunctions, entityConfig, entityName) => {
+export const createApiFunctionsPerEntity = (config) => reduce(config, (apiFunctions, entityConfig, entityName) => {
     apiFunctions[entityName] = {
         fetchById: callApi.bind(null, entityConfig.endpoint, entityConfig.schema, GET),
         fetch: callApi.bind(null, entityConfig.endpoint, new schema.Array(entityConfig.schema), GET),
@@ -90,9 +90,5 @@ export const createApiFunctions = (config) => reduce(config, (apiFunctions, enti
     return apiFunctions
 }, {})
 
-/**
- * For each entityConfig object in domainConfigs an object with api-functions is created,
- * containing api-functions for all routines
- */
-export default createApiFunctions(config)
+export default createApiFunctionsPerEntity(config)
 

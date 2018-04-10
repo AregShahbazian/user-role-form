@@ -55,20 +55,20 @@ export function* watchAction(action, doSaga) {
 export const createWatcherSagas = (domainConfigs, routines, apiFunctions) => {
     return reduce(domainConfigs, (watchers, entityConfig, entityName) => {
         watchers[entityName] = {
-            fetchById: watchAction.bind(null, routines[entityConfig.routineName].FETCH_BY_ID.TRIGGER,
-                makeApiCall.bind(null, routines[entityConfig.routineName].FETCH_BY_ID, apiFunctions[entityName].fetchById)),
+            fetchById: watchAction.bind(null, routines[entityConfig.routineString].FETCH_BY_ID.TRIGGER,
+                makeApiCall.bind(null, routines[entityConfig.routineString].FETCH_BY_ID, apiFunctions[entityName].fetchById)),
 
-            fetch: watchAction.bind(null, routines[entityConfig.routineName].FETCH.TRIGGER,
-                makeApiCall.bind(null, routines[entityConfig.routineName].FETCH, apiFunctions[entityName].fetch)),
+            fetch: watchAction.bind(null, routines[entityConfig.routineString].FETCH.TRIGGER,
+                makeApiCall.bind(null, routines[entityConfig.routineString].FETCH, apiFunctions[entityName].fetch)),
 
-            create: watchAction.bind(null, routines[entityConfig.routineName].CREATE.TRIGGER,
-                makeApiCall.bind(null, routines[entityConfig.routineName].CREATE, apiFunctions[entityName].create)),
+            create: watchAction.bind(null, routines[entityConfig.routineString].CREATE.TRIGGER,
+                makeApiCall.bind(null, routines[entityConfig.routineString].CREATE, apiFunctions[entityName].create)),
 
-            update: watchAction.bind(null, routines[entityConfig.routineName].UPDATE.TRIGGER,
-                makeApiCall.bind(null, routines[entityConfig.routineName].UPDATE, apiFunctions[entityName].update)),
+            update: watchAction.bind(null, routines[entityConfig.routineString].UPDATE.TRIGGER,
+                makeApiCall.bind(null, routines[entityConfig.routineString].UPDATE, apiFunctions[entityName].update)),
 
-            delete: watchAction.bind(null, routines[entityConfig.routineName].DELETE.TRIGGER,
-                makeApiCall.bind(null, routines[entityConfig.routineName].DELETE, apiFunctions[entityName].delete))
+            delete: watchAction.bind(null, routines[entityConfig.routineString].DELETE.TRIGGER,
+                makeApiCall.bind(null, routines[entityConfig.routineString].DELETE, apiFunctions[entityName].delete))
         }
         return watchers
     }, {})

@@ -9,26 +9,19 @@ const DELETE = 'DELETE';
 
 export const crudOps = [FETCH_BY_ID, FETCH, CREATE, UPDATE, DELETE];
 
-/**
- * Creates CRUD action creator routines for each routine name
- * @param routineNames
- */
-export const entityRoutines = (routineNames) => {
-    return routineNames.reduce((acc, routineName) => {
-        acc[routineName] = crudOps.reduce((acc2, crudOp) => {
-            acc2[crudOp] = createRoutine(
-                `${routineName}/${crudOp}`,
+export const routinesPerEntity = (entityRoutineStrings) => {
+    return entityRoutineStrings.reduce((domainRoutines, routineString) => {
+        domainRoutines[routineString] = crudOps.reduce((entityRoutines, crudOp) => {
+            entityRoutines[crudOp] = createRoutine(
+                `${routineString}/${crudOp}`,
                 (payload) => payload,
                 (payload, meta) => meta
             )
-            return acc2
+            return entityRoutines
         }, {})
-        return acc
+        return domainRoutines
     }, {})
 
 }
 
-/**
- * Create routines-objects for the list of routine-names
- */
-export default entityRoutines(Object.values(config).map(e => e.routineName))
+export default routinesPerEntity(Object.values(config).map(e => e.routineString))

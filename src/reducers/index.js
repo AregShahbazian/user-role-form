@@ -120,7 +120,7 @@ const createUserPickerFormReducers = handleActions({
  */
 let entityDataReducers = reduce(config, (reducers, entityConfig, entityName) => {
     reducers[entityName] =
-        createEntityDataReducers(routines[entityConfig.routineName], entityConfig.initialState)
+        createEntityDataReducers(routines[entityConfig.routineString], entityConfig.initialState)
     return reducers
 }, {})
 

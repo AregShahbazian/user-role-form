@@ -1,5 +1,5 @@
 import {normalize, schema} from "normalizr";
-import {createApiFunctions, createRequestObject, GET, PATCH, POST,} from "./index";
+import {createApiFunctionsPerEntity, createRequestObject, GET, PATCH, POST,} from "./index";
 
 describe('createRequestObject', () => {
 
@@ -61,7 +61,7 @@ describe('createRequestObject', () => {
     })
 })
 
-describe('createApiFunctions', () => {
+describe('createApiFunctionsPerEntity', () => {
 
     const myEntity1 = "myEntity1";
     const myEntity1Schema = new schema.Entity(myEntity1)
@@ -69,7 +69,7 @@ describe('createApiFunctions', () => {
 
     const myEntity1Config = {
         endpoint: "myEntity1",
-        routineName: "MY_ENTITY1",
+        routineString: "MY_ENTITY1",
         schema: myEntity1Schema,
         initialState: myEntity1InitialState
     }
@@ -80,7 +80,7 @@ describe('createApiFunctions', () => {
 
     const myEntity2Config = {
         endpoint: "myEntity2",
-        routineName: "MY_ENTITY2",
+        routineString: "MY_ENTITY2",
         schema: myEntity2Schema,
         initialState: myEntity2InitialState
     }
@@ -88,7 +88,7 @@ describe('createApiFunctions', () => {
     const domainConfigs = {myEntity1: myEntity1Config, myEntity2: myEntity2Config}
 
     const a = ["fetchById", "fetch", "create", "update"]
-    const apiFunctions = createApiFunctions(domainConfigs)
+    const apiFunctions = createApiFunctionsPerEntity(domainConfigs)
 
     a.forEach((a) => {
         it(`should create a bound function to callApi, for each entity using configuration object, for ${a}`, () => {

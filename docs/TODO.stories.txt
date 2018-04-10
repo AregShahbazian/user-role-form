@@ -1,7 +1,5 @@
 
-create e2e tests
-
-scale on mobile
+check code readability
 
 *** HISTORY ***
 
@@ -57,3 +55,8 @@ check documentation
 
 check unused routines/api functions
     leave as is
+
+create e2e tests
+
+scale on mobile
+

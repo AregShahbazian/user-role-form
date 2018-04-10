@@ -39,28 +39,28 @@ const entityConfigs = {}
 
 entityConfigs[projects] = {
     endpoint: "projects",
-    routineName: "PROJECTS",
+    routineString: "PROJECTS",
     schema: projectsSchema,
     initialState: projectsInitialState
 };
 
 entityConfigs[users] = {
     endpoint: "users",
-    routineName: "USERS",
+    routineString: "USERS",
     schema: usersSchema,
     initialState: usersInitialState
 };
 
 entityConfigs[roles] = {
     endpoint: "roles",
-    routineName: "ROLES",
+    routineString: "ROLES",
     schema: rolesSchema,
     initialState: rolesInitialState
 };
 
 entityConfigs[projectUserRoles] = {
     endpoint: "projectUserRoles",
-    routineName: "PROJECT_USER_ROLES",
+    routineString: "PROJECT_USER_ROLES",
     schema: projectUserRolesSchema,
     initialState: projectUserRolesInitialState
 };
