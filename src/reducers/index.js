@@ -1,20 +1,20 @@
-import config from "../config/index"
+import domainConfigs from "../config/index";
 import {combineReducers} from "redux";
 import {reducer as formReducer} from "redux-form";
-import update from "immutability-helper"
+import update from "immutability-helper";
 import {merge, reduce, union} from "lodash";
 import {combineActions, handleActions} from "redux-actions";
 import routines from "../actions/index";
 
 export const mergeEntityIntoState = (state, payload) => {
-    let entities = merge({}, state.entities, payload.entities)
-    let result = union(state.result, [payload.result])
+    let entities = merge({}, state.entities, payload.entities);
+    let result = union(state.result, [payload.result]);
 
     return {...state, entities, result}
 };
 
 export const deleteEntityFromStateResult = (state, payload) => {
-    let idx = state.result.indexOf(payload.result)
+    let idx = state.result.indexOf(payload.result);
     if (idx > -1) {
         return update(state, {result: {$splice: [[idx, 1]]}})
     }
@@ -89,7 +89,7 @@ const createUserPickerFormReducers = handleActions({
     }
 }, {});
 
-let dataReducersPerEntity = reduce(config, (reducers, entityConfig, entityName) => {
+let dataReducersPerEntity = reduce(domainConfigs, (reducers, entityConfig, entityName) => {
     reducers[entityName] =
         createDataReducersForEntity(routines[entityConfig.routineString], entityConfig.initialState)
     return reducers

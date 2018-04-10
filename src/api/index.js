@@ -1,4 +1,4 @@
-import config from "../config/index";
+import domainConfigs from "../config/index";
 import {normalize, schema} from "normalizr";
 import axios from "axios";
 import {reduce} from "lodash";
@@ -50,7 +50,7 @@ const createAndMakeRequest = (endpoint = '', schema, method = GET, payload = {},
     return makeRequest(method, request, schema);
 };
 
-export const createApiFunctionsPerEntity = (config) => reduce(config, (apiFunctions, entityConfig, entityName) => {
+export const createApiFunctionsPerEntity = (domainConfigs) => reduce(domainConfigs, (apiFunctions, entityConfig, entityName) => {
     apiFunctions[entityName] = {
         fetch: createAndMakeRequest.bind(null, entityName, new schema.Array(entityConfig.schema), GET),
         create: createAndMakeRequest.bind(null, entityName, entityConfig.schema, POST),
@@ -60,5 +60,5 @@ export const createApiFunctionsPerEntity = (config) => reduce(config, (apiFuncti
     return apiFunctions
 }, {});
 
-export default createApiFunctionsPerEntity(config)
+export default createApiFunctionsPerEntity(domainConfigs)
 

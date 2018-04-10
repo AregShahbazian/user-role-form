@@ -1,6 +1,8 @@
 
 check code readability
 
+selectors unit-tests
+
 *** HISTORY ***
 
 configure redux

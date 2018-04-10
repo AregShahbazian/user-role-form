@@ -1,7 +1,7 @@
-import {crudOps, routinesPerEntity} from "./index";
+import {crudOps, createRoutinesPerEntity} from "./index";
 
 describe('myEntity action creators', () => {
-    const routines = routinesPerEntity(["MY_ENTITY"]);
+    const routines = createRoutinesPerEntity(["MY_ENTITY"]);
     const PAYLOAD = "PAYLOAD";
     const META = {id: 123};
 

@@ -1,4 +1,4 @@
-import config from "../config/index";
+import domainConfigs from "../config/index";
 import {createRoutine} from "redux-saga-routines";
 
 const FETCH = 'FETCH';
@@ -8,7 +8,7 @@ const DELETE = 'DELETE';
 
 export const crudOps = [FETCH, CREATE, UPDATE, DELETE];
 
-export const routinesPerEntity = (entityRoutineStrings) => {
+export const createRoutinesPerEntity = (entityRoutineStrings) => {
     return entityRoutineStrings.reduce((domainRoutines, routineString) => {
         domainRoutines[routineString] = crudOps.reduce((entityRoutines, crudOp) => {
             entityRoutines[crudOp] = createRoutine(
@@ -23,4 +23,4 @@ export const routinesPerEntity = (entityRoutineStrings) => {
 
 };
 
-export default routinesPerEntity(Object.values(config).map(e => e.routineString))
+export default createRoutinesPerEntity(Object.values(domainConfigs).map(e => e.routineString))
